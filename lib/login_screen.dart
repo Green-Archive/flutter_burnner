@@ -93,7 +93,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const SizedBox(height: 35),
-                        GestureDetector(
+
+                    Row( children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.height / 2.5,
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -120,18 +124,56 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 35),
-                        const Center(
-                          child: Text(
-                            '- Or Sign In with -',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                      ),
+                      const SizedBox(width: 10),
+                    Expanded(child: SizedBox(child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SecondScreen()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.black,
+                        ),
+                        child: const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              ' Continue as guest ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                      ),
+                    ),
+                    ),
+                    ),
+                    ],),
+
+
+
+
+
+
+                        const SizedBox(height: 60),
+                        // const Center(
+                        //   child: Text(
+                        //     '- Or Sign In with -',
+                        //     style: TextStyle(
+                        //       color: Colors.black,
+                        //       fontSize: 20,
+                        //       fontWeight: FontWeight.w500,
+                        //     ),
+                        //   ),
+                        // ),
+                        // const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -173,6 +215,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Image.asset('assets/images/facebook.png'),
                               ),
                             ),
+
+
+
                           ],
                         )
                       ],
