@@ -94,73 +94,86 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 35),
 
-                    Row( children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.height / 2.5,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SecondScreen()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.black,
-                            ),
-                            child: const Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Text(
-                                  ' Log In',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w500,
+                        IntrinsicHeight(
+                          child: Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width / 2.5,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SecondScreen()));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: Colors.black,
+                                    ),
+                                    child: const Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 5.0,
+                                            top: 10.0,
+                                            right: 10.0,
+                                            bottom: 10.0),
+                                        child: Text(
+                                          ' Log In',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                    Expanded(child: SizedBox(child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SecondScreen()));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black,
-                        ),
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Text(
-                              ' Continue as guest ',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: SizedBox(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SecondScreen()));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: Colors.black,
+                                      ),
+                                      child: const Center(
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 5.0,
+                                              top: 10.0,
+                                              right: 10.0,
+                                              bottom: 10.0),
+                                          child: Text(
+                                            // softWrap: true,
+                                            textAlign: TextAlign.center,
+                                            ' Continue as guest ',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                    ),
-                    ),
-                    ],),
-
-
-
-
-
 
                         const SizedBox(height: 60),
                         // const Center(
@@ -215,9 +228,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Image.asset('assets/images/facebook.png'),
                               ),
                             ),
-
-
-
                           ],
                         )
                       ],
