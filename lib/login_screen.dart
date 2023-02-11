@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                SecondScreen()));
+                                                home_screen()));
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  SecondScreen()));
+                                                  home_screen()));
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
+                                        builder: (context) => home_screen()));
                               },
                               child: Container(
                                 width: 60,
@@ -214,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SecondScreen()));
+                                        builder: (context) => home_screen()));
                               },
                               child: Container(
                                 width: 60,
