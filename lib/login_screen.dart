@@ -76,7 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const TextField(
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.all(20),
+                              // border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.email,
                                 color: Colors.black,
@@ -107,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const TextField(
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.all(20),
+                              // border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.lock,
                                 color: Colors.black,
