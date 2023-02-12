@@ -11,15 +11,34 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+
+    const violet_theme = const Color(0xff9747FF);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
           children: [
+
+            const SizedBox(height:30)
+            ,
             Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height / 3,
-              child: Image.asset('assets/images/flutter.png'),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 151, 71, 255),
+                  width: 6.0,
+                ),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(3.0),
+                child: Image.asset(
+                  'assets/images/logo_china.png',
+                  width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.width / 4,
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
             Expanded(
               child: Container(
@@ -49,18 +68,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Colors.black,
+                            border: Border.all(
+                              color: violet_theme,
+                              width: 4.0,
+                            ),
                           ),
                           child: const TextField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.email,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.white),
+                              hintStyle: TextStyle(color: Colors.black45),
                             ),
                           ),
                         ),
@@ -77,18 +99,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: Colors.black,
+                            border: Border.all(
+                              color: violet_theme,
+                              width: 4.0,
+                            ),
                           ),
                           child: const TextField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
                                 Icons.lock,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               hintText: 'Password',
-                              hintStyle: TextStyle(color: Colors.white),
+                              hintStyle: TextStyle(color: Colors.black45),
                             ),
                           ),
                         ),
@@ -110,7 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: Colors.black,
+                                      border: Border.all(
+                                        color: violet_theme,
+                                        width: 4.0,
+                                      ),
                                     ),
                                     child: const Center(
                                       child: Padding(
@@ -122,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         child: Text(
                                           ' Log In',
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 30,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -146,7 +174,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
-                                        color: Colors.black,
+                                        border: Border.all(
+                                          color: violet_theme,
+                                          width: 4.0,
+                                        ),
                                       ),
                                       child: const Center(
                                         child: Padding(
@@ -160,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             textAlign: TextAlign.center,
                                             ' Continue as guest ',
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.black,
                                               fontSize: 30,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -198,14 +229,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         builder: (context) => home_screen()));
                               },
                               child: Container(
-                                width: 60,
-                                height: 60,
+                                width: 100,
+                                height: 100,
                                 padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: Colors.white38,
                                 ),
-                                child: Image.asset('assets/images/google.png'),
+                                child: Image.asset('assets/images/google_2.png'),
                               ),
                             ),
                             const SizedBox(width: 50),
@@ -217,15 +248,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         builder: (context) => home_screen()));
                               },
                               child: Container(
-                                width: 60,
-                                height: 60,
+                                width: 100,
+                                height: 100,
                                 padding: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: Colors.white38,
                                 ),
                                 child:
-                                    Image.asset('assets/images/facebook.png'),
+                                    Image.asset('assets/images/facebook_2.png'),
                               ),
                             ),
                           ],
