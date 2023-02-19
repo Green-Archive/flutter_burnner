@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/select_difficulty.dart';
+import 'package:flutter_burnner/pages/select_difficulty.dart';
 
 class easy_play extends StatelessWidget {
   const easy_play({super.key});
@@ -20,12 +20,17 @@ class easy_play extends StatelessWidget {
                 Container(
                   alignment: AlignmentDirectional.topStart,
                   padding: const EdgeInsets.only(left: 10.0),
-                  child: const Text("Back",
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 35,
-                        fontWeight: FontWeight.w500,
-                      )),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    child: const Text("Back",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 35,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
                 ),
                 Container(
                   alignment: AlignmentDirectional.topCenter,
@@ -86,26 +91,15 @@ class easy_play extends StatelessWidget {
             height: 110,
             // color: Colors.blue,
             alignment: AlignmentDirectional.center,
-            child: GestureDetector(
+            child: Text('choice1',
+                textAlign: TextAlign.center,
+                // softWrap: true,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 15,
 
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            select_difficulty()));
-              },
-
-              child: Text('choice1',
-                  textAlign: TextAlign.center,
-                  // softWrap: true,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 15,
-
-                    //  fontWeight: FontWeight.w500,
-                  )),
-            ),
+                  //  fontWeight: FontWeight.w500,
+                )),
           ),
 
           const SizedBox(height:15),
@@ -123,26 +117,15 @@ class easy_play extends StatelessWidget {
             height: 110,
             // color: Colors.blue,
             alignment: AlignmentDirectional.center,
-            child: GestureDetector(
+            child: Text('choice2',
+                textAlign: TextAlign.center,
+                // softWrap: true,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 15,
 
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            select_difficulty()));
-              },
-
-              child: Text('choice2',
-                  textAlign: TextAlign.center,
-                  // softWrap: true,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 15,
-
-                    //  fontWeight: FontWeight.w500,
-                  )),
-            ),
+                  //  fontWeight: FontWeight.w500,
+                )),
           )
 
         ],

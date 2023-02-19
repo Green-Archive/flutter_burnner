@@ -1,6 +1,6 @@
 // TODO Implement this library.
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/select_difficulty.dart';
+import 'package:flutter_burnner/pages/select_difficulty.dart';
 
 class home_screen extends StatelessWidget {
   const home_screen({super.key});

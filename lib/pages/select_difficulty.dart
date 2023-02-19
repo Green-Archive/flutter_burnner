@@ -16,12 +16,17 @@ class select_difficulty extends StatelessWidget{
             Container(
               alignment: AlignmentDirectional.topStart,
               padding: const EdgeInsets.only(left: 10.0),
-              child: const Text("Back",
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 35,
-                    fontWeight: FontWeight.w500,
-                  )),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Back",
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 35,
+                      fontWeight: FontWeight.w500,
+                    )),
+              ),
             ),
 
             Container(
@@ -152,7 +157,7 @@ class select_difficulty extends StatelessWidget{
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  select_difficulty()));
+                                  easy_play()));
                     },
 
                     child: Text('Medium',
@@ -195,7 +200,7 @@ class select_difficulty extends StatelessWidget{
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  select_difficulty()));
+                                  easy_play()));
                     },
 
                     child: Text('Hard',
