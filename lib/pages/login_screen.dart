@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
-import 'component/oauth_button.dart';
+import '../components/oauth_button.dart';
+import '../components/login_button.dart';
+import '../components/login_button_2.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,21 +35,25 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 145),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Color.fromARGB(255, 151, 71, 255),
                     width: 6.0,
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(3.0),
+                  borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
                     'assets/images/logo_china.png',
-                    width: MediaQuery.of(context).size.width / 4,
-                    height: MediaQuery.of(context).size.width / 4,
+                    //// width: MediaQuery.of(context).size.width / 3,
+                    //// height: MediaQuery.of(context).size.width / 3,
+
+                    width: 125,
+                    height: 125,
+
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -62,21 +69,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(left: 40.0, right: 40.0),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          SizedBox(height: 60),
+                           Text(
                             'Email',
-                            style: TextStyle(
+                            style: GoogleFonts.inter(
                               color: Colors.black,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           const SizedBox(height: 10),
                           Container(
+
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
@@ -86,8 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             child: const TextField(
+
+
                               style: TextStyle(color: Colors.black),
                               decoration: InputDecoration(
+
+
                                 contentPadding: EdgeInsets.all(20),
                                 // border: InputBorder.none,
                                 prefixIcon: Icon(
@@ -136,89 +149,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           IntrinsicHeight(
                             child: Row(
                               children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.5,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  home_screen()));
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color: violetTheme,
-                                          width: 4.0,
-                                        ),
-                                      ),
-                                      child: const Center(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 5.0,
-                                              top: 10.0,
-                                              right: 10.0,
-                                              bottom: 10.0),
-                                          child: Text(
-                                            ' Log In',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // ContinueButton( MediaQuery.of(context).size.width / 4,inputText: 'KIM')
+                                LoginButton("Log in",
+                                    MediaQuery.of(context).size.width / 2.5),
+
                                 const SizedBox(width: 10),
                                 Expanded(
-                                  child: SizedBox(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    home_screen()));
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          border: Border.all(
-                                            color: violetTheme,
-                                            width: 4.0,
-                                          ),
-                                        ),
-                                        child: const Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 5.0,
-                                                top: 10.0,
-                                                right: 10.0,
-                                                bottom: 10.0),
-                                            child: Text(
-                                              // softWrap: true,
-                                              textAlign: TextAlign.center,
-                                              ' Continue as guest ',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  child: LoginButton("Continue as guest", null),
                                 ),
                               ],
                             ),

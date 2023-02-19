@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../home_screen.dart';
+import '../pages/home_screen.dart';
 
 class OauthButton extends StatelessWidget {
   final String pathImageFileName;
