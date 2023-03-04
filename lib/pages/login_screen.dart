@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
           child: Column(
             children: [
-              const SizedBox(height: 145),
+              const SizedBox(height: 50),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 // ContinueButton( MediaQuery.of(context).size.width / 4,inputText: 'KIM')
                                 LoginButton("Log in",
-                                    MediaQuery.of(context).size.width / 2.5),
+                                    MediaQuery.of(context).size.width / 3.5),
 
                                 const SizedBox(width: 10),
                                 Expanded(
@@ -160,15 +160,50 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 60),
+                          const SizedBox(height: 23),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
                               OauthButton('assets/images/google_2.png'),
-                              SizedBox(width: 50),
-                              OauthButton('assets/images/facebook_2.png'),
                             ],
+                          ),
+
+                          SizedBox(height: 34),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  [
+                              Text(
+                                  textAlign: TextAlign.center,
+                                  "Need an account ?",
+                                  style:  GoogleFonts.inter(
+
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(0.0, 4.0),
+                                        blurRadius: 4.0,
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      )
+                                    ],
+
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+
+                              SizedBox(width: 15),
+
+                              Text(
+                                  textAlign: TextAlign.center,
+                                  "Sign Up",
+                                  style:  GoogleFonts.inter(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ]
                           )
+
                         ],
                       ),
                     ),

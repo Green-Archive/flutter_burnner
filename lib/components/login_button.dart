@@ -21,7 +21,7 @@ class LoginButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(15),
             border: Border.all(
               color: const Color(0xff9747FF),
               width: 4.0,
