@@ -15,16 +15,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    const violetTheme = const Color(0xff9747FF);
+    const violetTheme = Color(0xff9747FF);
 
-    const blueBackgroundColor = const Color(0xff32CEFF);
-    const violetBackgroundColor = const Color(0xff8B62FF);
+    const blueBackgroundColor = Color(0xff32CEFF);
+    const violetBackgroundColor = Color(0xff8B62FF);
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Color.fromARGB(255, 151, 71, 255),
+                    color: const Color.fromARGB(255, 151, 71, 255),
                     width: 6.0,
                   ),
                   borderRadius: BorderRadius.circular(15.0),
@@ -61,9 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.transparent,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 60),
+                          const SizedBox(height: 60),
                            Text(
                             'Email',
                             style: GoogleFonts.inter(
@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
 
-                          SizedBox(height: 34),
+                          const SizedBox(height: 34),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style:  GoogleFonts.inter(
 
                                     shadows: [
-                                      Shadow(
+                                      const Shadow(
                                         offset: Offset(0.0, 4.0),
                                         blurRadius: 4.0,
                                         color: Color.fromARGB(255, 0, 0, 0),
@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontWeight: FontWeight.w500,
                                   )),
 
-                              SizedBox(width: 15),
+                              const SizedBox(width: 15),
 
                               Text(
                                   textAlign: TextAlign.center,
