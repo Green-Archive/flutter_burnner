@@ -46,7 +46,6 @@ class HomeScreen extends StatelessWidget {
               child: const Text("Let's play",
                   style: TextStyle(
                     color: Colors.white,
-                    fontFamily: 'Poppins',
                     fontSize: 35,
                     fontWeight: FontWeight.w500,
                   )),

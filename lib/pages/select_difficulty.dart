@@ -12,25 +12,39 @@ class SelectDifficulty extends StatelessWidget {
         child: Scaffold(
       body: Container(
         decoration: ThemeApp().background(),
-        child: Column(children: [
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              alignment: AlignmentDirectional.topStart,
-              padding: const EdgeInsets.only(left: 25.0, top: 35.0),
-              child: Icon(Icons.arrow_back_ios,size: 35.0,),
-            ),
-          ),
-          Container(
-            alignment: AlignmentDirectional.topCenter,
-            padding: const EdgeInsets.only(left: 10.0),
-            child: const Text("Play",
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w500,
-                )),
+        child: Column(mainAxisSize: MainAxisSize.max, children: [
+          SizedBox(height: 35),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 25),
+                  alignment: AlignmentDirectional.topStart,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        size: 35.0,
+                      )),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: AlignmentDirectional.center,
+                  child: Text("Competition",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+              ),
+              Expanded(child: Container())
+            ],
           ),
           const SizedBox(
             height: 30,

@@ -17,27 +17,19 @@ class EasyPlay extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: AlignmentDirectional.topStart,
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    child: const Text("Back",
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 35,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Back",
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.w500,
+                      )),
                 ),
                 Container(
-                  alignment: AlignmentDirectional.topCenter,
-                  padding: const EdgeInsets.only(left: 10.0),
                   child: const Text("Logo",
                       style: TextStyle(
-                        fontFamily: 'Poppins',
                         fontSize: 35,
                         fontWeight: FontWeight.w500,
                       )),
