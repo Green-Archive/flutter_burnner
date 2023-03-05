@@ -9,13 +9,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
+      body: Container(
         decoration: ThemeApp.background(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            const SizedBox(height: 50),
+            SizedBox(height: 60),
             Padding(
                 padding: EdgeInsets.only(left: 30.0, right: 30.0),
                 child: Row(
@@ -87,7 +86,7 @@ class HomeScreen extends StatelessWidget {
             ))
           ],
         ),
-      )),
+      ),
     );
   }
 }

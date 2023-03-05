@@ -7,13 +7,13 @@ class SelectDifficulty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Container(
         decoration: ThemeApp.background(),
         child: Column(mainAxisSize: MainAxisSize.max, children: [
+          SizedBox(height: 60),
           Padding(
-            padding: const EdgeInsets.all(35.0),
+            padding: EdgeInsets.only(left: 30.0, right: 30.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,6 +102,6 @@ class SelectDifficulty extends StatelessWidget {
           ),
         ]),
       ),
-    ));
+    );
   }
 }

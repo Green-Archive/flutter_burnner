@@ -7,36 +7,28 @@ class EasyPlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: Container(
         decoration: ThemeApp.background(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            SizedBox(height: 60),
             Padding(
-              padding: const EdgeInsets.all(35.0),
+              padding: EdgeInsets.only(left: 30.0, right: 30.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BackToTheFuture(),
-                  Container(
-
-                    width: MediaQuery.of(context).size.width / 1.8,
-                    alignment: AlignmentDirectional.center,
-                    child: Text("Competition",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
+                  Container(),
                   Expanded(
                     child: Container(
-
-                      child: Icon(Icons.heart_broken
-                      ,size: 50,),
+                      alignment: AlignmentDirectional.topEnd,
+                      child: Icon(
+                        Icons.favorite,
+                        size: 35,
+                      ),
                     ),
                   ),
                 ],
@@ -60,14 +52,12 @@ class EasyPlay extends StatelessWidget {
                 )),
             const SizedBox(height: 30),
             NormalButton('choice1', 1.2, 110, '/select-difficulty'),
-
             const SizedBox(height: 15),
             NormalButton('choice2', 1.2, 110, '/select-difficulty'),
-
           ],
         ),
       ),
-    ));
+    );
   }
 }
 
