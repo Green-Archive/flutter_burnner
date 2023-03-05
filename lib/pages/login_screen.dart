@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../components/theme-app.dart';
+import '../components/theme_app.dart';
 import '../components/oauth_button.dart';
 import '../components/login_button.dart';
 
@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: ThemeApp().background(),
+          decoration: ThemeApp.background(),
           child: Column(
             children: [
               const SizedBox(height: 50),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/components/theme-app.dart';
+import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NormalButton extends StatelessWidget {

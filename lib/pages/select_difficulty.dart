@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../components/theme-app.dart';
-import 'easy_play.dart';
+import '../components/normal_button.dart';
+import '../components/theme_app.dart';
 
 class SelectDifficulty extends StatelessWidget {
   const SelectDifficulty({super.key});
@@ -11,29 +10,17 @@ class SelectDifficulty extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        decoration: ThemeApp().background(),
+        decoration: ThemeApp.background(),
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          SizedBox(height: 35),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 25),
-                  alignment: AlignmentDirectional.topStart,
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        size: 35.0,
-                      )),
-                ),
-              ),
-              Expanded(
-                child: Container(
+          Padding(
+            padding: const EdgeInsets.all(35.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BackToTheFuture(),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.5,
                   alignment: AlignmentDirectional.center,
                   child: Text("Competition",
                       style: TextStyle(
@@ -42,9 +29,9 @@ class SelectDifficulty extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       )),
                 ),
-              ),
-              Expanded(child: Container())
-            ],
+                Expanded(child: Container())
+              ],
+            ),
           ),
           const SizedBox(
             height: 30,
@@ -55,21 +42,21 @@ class SelectDifficulty extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(90.0),
                   border: Border.all(
                     color: Color.fromARGB(255, 151, 71, 255),
                     width: 4.0,
                   ),
                 ),
-                width: MediaQuery.of(context).size.width / 1.5,
+                width: MediaQuery.of(context).size.width / 1.7,
                 padding: EdgeInsets.all(20.0),
-                height: 150,
+                height: 175,
                 alignment: AlignmentDirectional.center,
-                child: Text('Some image',
+                child: Text('ภาพประกอบ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 15,
+                      fontSize: 16,
                     )),
               )
             ],
@@ -84,8 +71,7 @@ class SelectDifficulty extends StatelessWidget {
               Text('select difficulty',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 20,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ))
             ],
@@ -95,35 +81,7 @@ class SelectDifficulty extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(45.0),
-                  border: Border.all(
-                    color: Color.fromARGB(255, 151, 71, 255),
-                    width: 4.0,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width / 1.5,
-                padding: EdgeInsets.all(20.0),
-                height: 100,
-                // color: Colors.blue,
-                alignment: AlignmentDirectional.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EasyPlay()));
-                  },
-                  child: Text('Easy',
-                      textAlign: TextAlign.center,
-                      // softWrap: true,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-
-                        //  fontWeight: FontWeight.w500,
-                      )),
-                ),
-              )
+              NormalButton('Easy', 1.5, 100, '/easy-play'),
             ],
           ),
           const SizedBox(height: 10),
@@ -131,35 +89,7 @@ class SelectDifficulty extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(45.0),
-                  border: Border.all(
-                    color: Color.fromARGB(255, 151, 71, 255),
-                    width: 4.0,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width / 1.5,
-                padding: EdgeInsets.all(20.0),
-                height: 100,
-                // color: Colors.blue,
-                alignment: AlignmentDirectional.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EasyPlay()));
-                  },
-                  child: Text('Medium',
-                      textAlign: TextAlign.center,
-                      // softWrap: true,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-
-                        //  fontWeight: FontWeight.w500,
-                      )),
-                ),
-              )
+              NormalButton('Medium', 1.5, 100, '/easy-play'),
             ],
           ),
           const SizedBox(height: 10),
@@ -167,35 +97,7 @@ class SelectDifficulty extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(45.0),
-                  border: Border.all(
-                    color: Color.fromARGB(255, 151, 71, 255),
-                    width: 4.0,
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width / 1.5,
-                padding: EdgeInsets.all(20.0),
-                height: 100,
-                // color: Colors.blue,
-                alignment: AlignmentDirectional.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EasyPlay()));
-                  },
-                  child: Text('Hard',
-                      textAlign: TextAlign.center,
-                      // softWrap: true,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-
-                        //  fontWeight: FontWeight.w500,
-                      )),
-                ),
-              )
+              NormalButton('Hard', 1.5, 100, '/easy-play'),
             ],
           ),
         ]),

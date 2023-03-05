@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/pages/select_difficulty.dart';
-
-import '../components/theme-app.dart';
+import '../components/theme_app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
 
@@ -13,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Container(
-        decoration: ThemeApp().background(),
+        decoration: ThemeApp.background(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
