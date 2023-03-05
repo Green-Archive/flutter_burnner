@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/easy_play.dart';
+import 'package:flutter_burnner/pages/select_difficulty.dart';
 // import 'package:flutter_flow/flutter_flow_theme.dart';
 // import 'package:flutter_flow/flutter_flow_util.dart';
 // import 'package:testing/login_screen.dart';
@@ -16,7 +17,8 @@ void main() {
       title: "Login Screen ",
       home: LoginScreen(),
       routes: {
-        '/easy-play': (ctx) => EasyPlay()
+        '/easy-play': (ctx) => EasyPlay(),
+        '/select-difficulty': (ctx) => SelectDifficulty(),
       },
     ),
   );

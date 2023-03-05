@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../components/background_gradient.dart';
 import '../components/oauth_button.dart';
 import '../components/login_button.dart';
 
@@ -13,22 +14,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    const blueBackgroundColor = Color(0xff32CEFF);
-    const violetBackgroundColor = Color(0xff8B62FF);
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              blueBackgroundColor,
-              violetBackgroundColor,
-            ],
-          )),
+          decoration: BackgroundGradient().background(),
           child: Column(
             children: [
               const SizedBox(height: 50),
@@ -121,6 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+
 
 class LogoOtter extends StatelessWidget {
   const LogoOtter({super.key});

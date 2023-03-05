@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
 
+import '../components/background_gradient.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
 
@@ -19,15 +20,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            blueBackgroundColor,
-            violetBackgroundColor,
-          ],
-        )),
+        decoration: BackgroundGradient().background(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -74,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      NormalButton('Competition',1.5,'/easy-play')
+                      NormalButton('Competition',1.5,'/select-difficulty')
                     ],
                   ),
                   const SizedBox(height: 40),

@@ -14,25 +14,26 @@ class NormalButton extends StatelessWidget {
   Widget build(BuildContext context) {
     const violetTheme = Color(0xff9747FF);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(45.0),
-        border: Border.all(
-          color: violetTheme,
-          width: 4.0,
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, routeScreen);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(45.0),
+          border: Border.all(
+            color: violetTheme,
+            width: 4.0,
+          ),
         ),
+        width: MediaQuery.of(context).size.width / widthButton,
+        padding: EdgeInsets.all(20.0),
+        height: 130,
+        // color: Colors.blue,
+        alignment: AlignmentDirectional.center,
+        child: TextDisplay(textDisplay),
       ),
-      width: MediaQuery.of(context).size.width / widthButton,
-      padding: EdgeInsets.all(20.0),
-      height: 130,
-      // color: Colors.blue,
-      alignment: AlignmentDirectional.center,
-      child: InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, routeScreen);
-          },
-          child: TextDisplay(textDisplay)),
     );
   }
 }
