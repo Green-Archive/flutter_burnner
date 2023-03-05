@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/components/theme-app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NormalButton extends StatelessWidget {
   final String textDisplay;
   final double widthButton;
   final String routeScreen;
+  final double heightButton;
 
   // const NormalButton({super.key});
-  const NormalButton(this.textDisplay, this.widthButton, this.routeScreen,
+  const NormalButton(this.textDisplay, this.widthButton,this.heightButton, this.routeScreen,
       {super.key});
 
   @override
   Widget build(BuildContext context) {
-    const violetTheme = Color(0xff9747FF);
 
     return InkWell(
       onTap: () {
@@ -23,14 +24,13 @@ class NormalButton extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(45.0),
           border: Border.all(
-            color: violetTheme,
+            color: ThemeApp.violetTheme,
             width: 4.0,
           ),
         ),
         width: MediaQuery.of(context).size.width / widthButton,
         padding: EdgeInsets.all(20.0),
-        height: 130,
-        // color: Colors.blue,
+        height: heightButton,
         alignment: AlignmentDirectional.center,
         child: TextDisplay(textDisplay),
       ),

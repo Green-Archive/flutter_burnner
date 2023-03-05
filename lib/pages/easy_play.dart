@@ -47,7 +47,7 @@ class EasyPlay extends StatelessWidget {
           ),
           Stack(
             children: [
-              DividerExample(),
+              // DividerExample(),
 
               Container(
                 alignment: Alignment.center,
@@ -68,7 +68,7 @@ class EasyPlay extends StatelessWidget {
           ),
           const SizedBox(height:33),
 
-          Text('random(what is this character)',
+          Text('what is this character',
           style: TextStyle(
               fontSize: 25,
             fontWeight: FontWeight.w400,
@@ -115,16 +115,11 @@ class EasyPlay extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 1.2,
             padding: EdgeInsets.all(20.0),
             height: 110,
-            // color: Colors.blue,
             alignment: AlignmentDirectional.center,
             child: Text('choice2',
                 textAlign: TextAlign.center,
-                // softWrap: true,
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: 15,
-
-                  //  fontWeight: FontWeight.w500,
                 )),
           )
 
@@ -139,6 +134,15 @@ class DividerExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Divider divider = Divider(
+      height: 20,
+      thickness: 4,
+      indent: 0,
+      endIndent: 0,
+      color: Colors.lightBlueAccent[100],
+    );
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 60.0,
@@ -147,37 +151,13 @@ class DividerExample extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 41.0),
-          Divider(
-            height: 20,
-            thickness: 4,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.lightBlueAccent[100],
-          ),
+          divider,
           SizedBox(height: 25.0),
-          Divider(
-            height: 20,
-            thickness: 4,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.lightBlueAccent[100],
-          ),
+          divider,
           SizedBox(height: 25.0),
-          Divider(
-            height: 20,
-            thickness: 4,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.lightBlueAccent[100],
-          ),
+          divider,
           SizedBox(height: 25.0),
-          Divider(
-            height: 20,
-            thickness: 4,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.lightBlueAccent[100],
-          ),
+          divider,
         ],
       ),
     );

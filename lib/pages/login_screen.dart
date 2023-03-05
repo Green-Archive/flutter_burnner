@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../components/background_gradient.dart';
+import '../components/theme-app.dart';
 import '../components/oauth_button.dart';
 import '../components/login_button.dart';
 
@@ -16,9 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: Container(
-          decoration: BackgroundGradient().background(),
+          decoration: ThemeApp().background(),
           child: Column(
             children: [
               const SizedBox(height: 50),
@@ -112,20 +111,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-
-
 class LogoOtter extends StatelessWidget {
   const LogoOtter({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const violetTheme = Color(0xff9747FF);
     final borderRadius = BorderRadius.circular(15); // Image border
 
     return Container(
         padding: const EdgeInsets.all(6), // Border width
         decoration:
-            BoxDecoration(color: violetTheme, borderRadius: borderRadius),
+            BoxDecoration(color: ThemeApp.violetTheme, borderRadius: borderRadius),
         child: ClipRRect(
           borderRadius: borderRadius,
           child: SizedBox.fromSize(
@@ -148,7 +144,6 @@ class LoginTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const violetTheme = Color(0xff9747FF);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +162,7 @@ class LoginTextBox extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: violetTheme,
+              color: ThemeApp.violetTheme,
               width: 4.0,
             ),
           ),

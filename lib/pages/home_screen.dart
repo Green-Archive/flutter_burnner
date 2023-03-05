@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
 
-import '../components/background_gradient.dart';
+import '../components/theme-app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
 
@@ -10,17 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    const violetTheme = Color(0xff9747FF);
-
-    const blueBackgroundColor = Color(0xff32CEFF);
-    const violetBackgroundColor = Color(0xff8B62FF);
-
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
           child: Container(
-        decoration: BackgroundGradient().background(),
+        decoration: ThemeApp().background(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -67,7 +60,8 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      NormalButton('Competition',1.5,'/select-difficulty')
+                      NormalButton(
+                          'Competition', 1.5, 130, '/select-difficulty')
                     ],
                   ),
                   const SizedBox(height: 40),
@@ -75,9 +69,8 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      NormalButton('Practice \n Mode',3,'/easy-play')
-                      ,
-                      NormalButton('Learning \n Content',3,'/easy-play')
+                      NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
+                      NormalButton('Learning \n Content', 3, 130, '/easy-play')
                     ],
                   ),
                   const SizedBox(
@@ -87,66 +80,9 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 151, 71, 255),
-                            width: 4.0,
-                          ),
-                        ),
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        padding: EdgeInsets.all(20.0),
-                        height: 80,
-                        alignment: AlignmentDirectional.center,
-                        child: Text('topic',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 15,
-                              //  fontWeight: FontWeight.w500,
-                            )),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 151, 71, 255),
-                            width: 4.0,
-                          ),
-                        ),
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        padding: EdgeInsets.all(20.0),
-                        height: 80,
-                        alignment: AlignmentDirectional.center,
-                        child: Text('score',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 15,
-                              //  fontWeight: FontWeight.w500,
-                            )),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
-                          border: Border.all(
-                            color: Color.fromARGB(255, 151, 71, 255),
-                            width: 4.0,
-                          ),
-                        ),
-                        width: MediaQuery.of(context).size.width / 3.5,
-                        padding: EdgeInsets.all(20.0),
-                        height: 80,
-                        alignment: AlignmentDirectional.center,
-                        child: Text('settings',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 15,
-                              //  fontWeight: FontWeight.w500,
-                            )),
-                      ),
+                      NormalButton('Topic', 3.5, 80, '/easy-play'),
+                      NormalButton('Score', 3.5, 80, '/easy-play'),
+                      NormalButton('Settings', 3.5, 80, '/easy-play')
                     ],
                   )
                 ],
