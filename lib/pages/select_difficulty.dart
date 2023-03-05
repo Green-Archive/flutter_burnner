@@ -114,7 +114,7 @@ class select_difficulty extends StatelessWidget{
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  easy_play()));
+                                  EasyPlay()));
                     },
 
                     child: Text('Easy',
@@ -157,7 +157,7 @@ class select_difficulty extends StatelessWidget{
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  easy_play()));
+                                  EasyPlay()));
                     },
 
                     child: Text('Medium',
@@ -200,7 +200,7 @@ class select_difficulty extends StatelessWidget{
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  easy_play()));
+                                  EasyPlay()));
                     },
 
                     child: Text('Hard',

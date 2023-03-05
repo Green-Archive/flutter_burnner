@@ -13,10 +13,10 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widthButton,
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const home_screen()));
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
         },
         child: Container(
           decoration: BoxDecoration(

@@ -11,7 +11,7 @@ class OauthButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const home_screen()));
+            MaterialPageRoute(builder: (context) => const HomeScreen()));
       },
       child: Container(
         width: 64,

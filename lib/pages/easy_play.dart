@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
 
-class easy_play extends StatelessWidget {
-  const easy_play({super.key});
+class EasyPlay extends StatelessWidget {
+  const EasyPlay({super.key});
 
   @override
   Widget build(BuildContext context) {

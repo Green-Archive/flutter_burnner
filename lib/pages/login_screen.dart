@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'home_screen.dart';
 import '../components/oauth_button.dart';
 import '../components/login_button.dart';
-import '../components/login_button_2.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,8 +13,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    const violetTheme = Color(0xff9747FF);
-
     const blueBackgroundColor = Color(0xff32CEFF);
     const violetBackgroundColor = Color(0xff8B62FF);
 
@@ -36,28 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               const SizedBox(height: 50),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 151, 71, 255),
-                    width: 6.0,
-                  ),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/logo_china.png',
-                    //// width: MediaQuery.of(context).size.width / 3,
-                    //// height: MediaQuery.of(context).size.width / 3,
-
-                    width: 125,
-                    height: 125,
-
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+              LogoOtter(),
               Expanded(
                 child: Container(
                   width: double.infinity,
@@ -75,75 +50,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 60),
-                           Text(
-                            'Email',
-                            style: GoogleFonts.inter(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: violetTheme,
-                                width: 4.0,
-                              ),
-                            ),
-                            child: const TextField(
-
-
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-
-
-                                contentPadding: EdgeInsets.all(20),
-                                // border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.email,
-                                  color: Colors.black,
-                                ),
-                                hintText: 'Email',
-                                hintStyle: TextStyle(color: Colors.black45),
-                              ),
-                            ),
-                          ),
+                          LoginTextBox(
+                              titleName: 'Email', iconName: Icons.email),
                           const SizedBox(height: 15),
-                          const Text(
-                            'Password',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: violetTheme,
-                                width: 4.0,
-                              ),
-                            ),
-                            child: const TextField(
-                              style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
-                                // border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.lock,
-                                  color: Colors.black,
-                                ),
-                                hintText: 'Password',
-                                hintStyle: TextStyle(color: Colors.black45),
-                              ),
-                            ),
+                          LoginTextBox(
+                            titleName: 'Password',
+                            iconName: Icons.lock,
                           ),
                           const SizedBox(height: 35),
                           IntrinsicHeight(
@@ -167,43 +79,35 @@ class _LoginScreenState extends State<LoginScreen> {
                               OauthButton('assets/images/google_2.png'),
                             ],
                           ),
-
                           const SizedBox(height: 34),
-
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:  [
-                              Text(
-                                  textAlign: TextAlign.center,
-                                  "Need an account ?",
-                                  style:  GoogleFonts.inter(
-
-                                    shadows: [
-                                      const Shadow(
-                                        offset: Offset(0.0, 4.0),
-                                        blurRadius: 4.0,
-                                        color: Color.fromARGB(255, 0, 0, 0),
-                                      )
-                                    ],
-
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  )),
-
-                              const SizedBox(width: 15),
-
-                              Text(
-                                  textAlign: TextAlign.center,
-                                  "Sign Up",
-                                  style:  GoogleFonts.inter(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ]
-                          )
-
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                    textAlign: TextAlign.center,
+                                    "Need an account ?",
+                                    style: GoogleFonts.inter(
+                                      shadows: [
+                                        const Shadow(
+                                          offset: Offset(0.0, 4.0),
+                                          blurRadius: 6.0,
+                                          color: Color.fromARGB(63, 0, 0, 0),
+                                        )
+                                      ],
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    )),
+                                const SizedBox(width: 15),
+                                Text(
+                                    textAlign: TextAlign.center,
+                                    "Sign Up",
+                                    style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ])
                         ],
                       ),
                     ),
@@ -214,6 +118,82 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LogoOtter extends StatelessWidget {
+  const LogoOtter({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const violetTheme = Color(0xff9747FF);
+    final borderRadius = BorderRadius.circular(15); // Image border
+
+    return Container(
+        padding: const EdgeInsets.all(6), // Border width
+        decoration:
+            BoxDecoration(color: violetTheme, borderRadius: borderRadius),
+        child: ClipRRect(
+          borderRadius: borderRadius,
+          child: SizedBox.fromSize(
+            size: const Size.fromRadius(60), // Image radius
+            child: Image.asset(
+              'assets/images/seki.png',
+            ),
+          ),
+        ));
+  }
+}
+
+class LoginTextBox extends StatelessWidget {
+  final String titleName;
+
+  final IconData iconName;
+
+  const LoginTextBox(
+      {super.key, required this.titleName, required this.iconName});
+
+  @override
+  Widget build(BuildContext context) {
+    const violetTheme = Color(0xff9747FF);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '${titleName}',
+          style: GoogleFonts.inter(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: violetTheme,
+              width: 4.0,
+            ),
+          ),
+          child: TextField(
+            style: TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(20),
+              // border: InputBorder.none,
+              prefixIcon: Icon(
+                iconName,
+                color: Colors.black,
+              ),
+              hintText: '${titleName}',
+              hintStyle: TextStyle(color: Colors.black45),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
