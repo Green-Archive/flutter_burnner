@@ -1,10 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/theme_app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+
+  final user = FirebaseAuth.instance.currentUser!;
+
+
+   HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Text(
-                        'Hello, Mr.guset',
+                        'Hello, ${user.email?.substring(0, 5)}',
                         style: TextStyle(
                           fontFamily: 'Inter-Light',
                           fontSize: 24,
@@ -78,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       NormalButton('Topic', 3.5, 80, '/easy-play'),
                       NormalButton('Score', 3.5, 80, '/easy-play'),
-                      NormalButton('Settings', 3.5, 80, '/easy-play')
+                      NormalButton('Settings', 3.5, 80, '/settings')
                     ],
                   )
                 ],

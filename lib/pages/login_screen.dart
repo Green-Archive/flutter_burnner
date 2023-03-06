@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/login_text_box.dart';
 import '../components/theme_app.dart';
 import '../components/oauth_button.dart';
-import '../components/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +14,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -24,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             const SizedBox(height: 50),
-            const LogoOtter(),
+            logoOtter(),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 30.0, right: 30.0),
@@ -47,14 +52,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Row(
                           children: [
                             // ContinueButton( MediaQuery.of(context).size.width / 4,inputText: 'KIM')
-                            LoginButton(
+                            loginButton(
+                                context: context,
                                 textDisplay: "Log in",
                                 widthButton: 3.5,
                                 routeScreen: '/home'),
 
                             const SizedBox(width: 10),
                             Expanded(
-                              child: LoginButton(
+                              child: guestButton(
+                                  context: context,
                                   textDisplay: "Continue as guest",
                                   routeScreen: '/home'),
                             ),
@@ -112,13 +119,50 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
 
-class LogoOtter extends StatelessWidget {
-  const LogoOtter({super.key});
+  Future signIn() async{
+    await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim()
+    ).then((user) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      print("signed in ");
+    }).catchError((error) {
+      print(error);
+    });
+  }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget loginButton(
+      {required BuildContext context,
+      required String textDisplay,
+      double? widthButton,
+      required String routeScreen}) {
+    return InkWell(
+      onTap: () {
+        signIn();
+      },
+      child: ThemeApp.loginButtonShape(
+          context: context, textDisplay: textDisplay, widthButton: widthButton),
+    );
+  }
+
+  Widget guestButton(
+      {required BuildContext context,
+        required String textDisplay,
+        double? widthButton,
+        required String routeScreen}) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, routeScreen);
+      },
+      child: ThemeApp.loginButtonShape(
+          context: context, textDisplay: textDisplay, widthButton: widthButton),
+    );
+  }
+
+
+  Widget logoOtter() {
     final borderRadius = BorderRadius.circular(15); // Image border
 
     return Container(
@@ -135,4 +179,12 @@ class LogoOtter extends StatelessWidget {
           ),
         ));
   }
+
+
 }
+
+
+
+
+
+

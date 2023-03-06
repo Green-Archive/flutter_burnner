@@ -56,7 +56,7 @@ class _ContinueButtonState extends State<ContinueButton> {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+              context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
         },
         child: Container(
           decoration: BoxDecoration(
