@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../components/login_text_box.dart';
 import '../components/theme_app.dart';
 import '../components/oauth_button.dart';
 import '../components/login_button.dart';
@@ -12,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +44,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 60),
-                        LoginTextBox(titleName: 'Email', iconName: Icons.email),
+                        LoginTextBox(titleName: 'Email', iconName: Icons.email, textController: emailController),
                         const SizedBox(height: 25),
                         LoginTextBox(
                           titleName: 'Password',
                           iconName: Icons.lock,
+                            textController: passwordController
                         ),
                         const SizedBox(height: 35),
                         IntrinsicHeight(
@@ -133,56 +140,5 @@ class LogoOtter extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class LoginTextBox extends StatelessWidget {
-  final String titleName;
-
-  final IconData iconName;
-
-  const LoginTextBox(
-      {super.key, required this.titleName, required this.iconName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '${titleName}',
-          style: GoogleFonts.inter(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 10),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: ThemeApp.violetTheme,
-              width: 4.0,
-            ),
-          ),
-          child: TextField(
-            style: TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.all(20),
-              // border: InputBorder.none,
-              prefixIcon: Icon(
-                iconName,
-                color: Colors.black,
-              ),
-              hintText: '${titleName}',
-              hintStyle: TextStyle(color: Colors.black45),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

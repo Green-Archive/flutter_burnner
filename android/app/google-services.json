@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "755198588899",
+    "project_id": "flutter-burnner",
+    "storage_bucket": "flutter-burnner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755198588899:android:35c6addc0a9a126e3392d6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_burnner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755198588899-j6vima2nvm4j3gs2gh4aflfs6b7ogb7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgzayHo4veCh9HdOSqJVxOJ5iIwyePngs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755198588899-j6vima2nvm4j3gs2gh4aflfs6b7ogb7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
