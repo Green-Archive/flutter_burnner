@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import '../components/login_button.dart';
 import '../components/login_text_box.dart';
-import '../components/oauth_button.dart';
-import 'login_screen.dart';
-import 'dart:async';
-
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -37,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BackToTheFuture(),
+                    Expanded(child: BackToTheFuture()),
                     Container(
                       width: MediaQuery.of(context).size.width / 1.5,
                       alignment: AlignmentDirectional.center,
@@ -50,68 +45,72 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Expanded(child: Container())
                   ])),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 60),
-                  LoginTextBox(
-                      titleName: 'Email',
-                      iconName: Icons.email,
-                      textController: emailController),
-                  const SizedBox(height: 25),
-                  LoginTextBox(
-                      titleName: 'Password',
-                      iconName: Icons.lock,
-                      textController: passwordController),
-                  const SizedBox(height: 25),
-                  LoginTextBox(
-                      titleName: 'Confirm Password',
-                      iconName: Icons.lock,
-                      textController: confirmController),
-                  const SizedBox(height: 35),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // LoginButton("Sign Up", MediaQuery.of(context).size.width / 3.5),
-                      buildButtonSignUp(context),
-                    ],
-                  ),
-                  const SizedBox(height: 34),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Text(
-                        textAlign: TextAlign.center,
-                        "  already have an account ?",
-                        style: GoogleFonts.inter(
-                          shadows: [
-                            const Shadow(
-                              offset: Offset(0.0, 4.0),
-                              blurRadius: 6.0,
-                              color: Color.fromARGB(63, 0, 0, 0),
-                            )
-                          ],
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        )),
-                    const SizedBox(width: 15),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                          textAlign: TextAlign.center,
-                          "Log In",
-                          style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          )),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    LoginTextBox(
+                        titleName: 'Email',
+                        iconName: Icons.email,
+                        textController: emailController),
+                    const SizedBox(height: 25),
+                    LoginTextBox(
+                        titleName: 'Password',
+                        iconName: Icons.lock,
+                        textController: passwordController),
+                    const SizedBox(height: 25),
+                    LoginTextBox(
+                        titleName: 'Confirm Password',
+                        iconName: Icons.lock,
+                        textController: confirmController),
+                    const SizedBox(height: 35),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // LoginButton("Sign Up", MediaQuery.of(context).size.width / 3.5),
+                        buildButtonSignUp(
+                          context: context,
+                        ),
+                      ],
                     ),
-                  ])
-                ],
+                    const SizedBox(height: 34),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                          textAlign: TextAlign.center,
+                          "  already have an account ?",
+                          style: GoogleFonts.inter(
+                            shadows: [
+                              const Shadow(
+                                offset: Offset(0.0, 4.0),
+                                blurRadius: 6.0,
+                                color: Color.fromARGB(63, 0, 0, 0),
+                              )
+                            ],
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          )),
+                      const SizedBox(width: 15),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                            textAlign: TextAlign.center,
+                            "Log In",
+                            style: GoogleFonts.inter(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ),
+                    ])
+                  ],
+                ),
               ),
             ),
           ),
@@ -137,42 +136,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  Widget buildButtonSignUp(BuildContext context) {
+  Widget buildButtonSignUp({required BuildContext context}) {
     return InkWell(
       onTap: () {
         signUp();
-        Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/home'));
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/login', ModalRoute.withName('/home'));
       },
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width/3.5,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: const Color(0xff9747FF),
-              width: 4.0,
-            ),
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
-              child: Text(
-                // softWrap: true,
-                textAlign: TextAlign.center,
-                'Sign Up',
-                style:  GoogleFonts.inter(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+      child: ThemeApp.loginButtonShape(
+          context: context, textDisplay: 'Sign up', widthButton: 3.5),
     );
   }
-
 }

@@ -18,8 +18,8 @@ Future main() async {
      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Login Screen ",
-      home: LoginScreen(),
-      routes: {
+       initialRoute: '/login',
+       routes: {
         '/easy-play': (ctx) => EasyPlay(),
         '/select-difficulty': (ctx) => SelectDifficulty(),
         '/login': (ctx) => LoginScreen(),

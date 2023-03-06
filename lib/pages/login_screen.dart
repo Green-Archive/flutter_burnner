@@ -13,10 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -28,87 +26,83 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 50),
             const LogoOtter(),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 60),
-                        LoginTextBox(titleName: 'Email', iconName: Icons.email, textController: emailController),
-                        const SizedBox(height: 25),
-                        LoginTextBox(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 40),
+                      LoginTextBox(
+                          titleName: 'Email',
+                          iconName: Icons.email,
+                          textController: emailController),
+                      const SizedBox(height: 25),
+                      LoginTextBox(
                           titleName: 'Password',
                           iconName: Icons.lock,
-                            textController: passwordController
-                        ),
-                        const SizedBox(height: 35),
-                        IntrinsicHeight(
-                          child: Row(
-                            children: [
-                              // ContinueButton( MediaQuery.of(context).size.width / 4,inputText: 'KIM')
-                              LoginButton("Log in",
-                                  MediaQuery.of(context).size.width / 3.5),
+                          textController: passwordController),
+                      const SizedBox(height: 35),
+                      IntrinsicHeight(
+                        child: Row(
+                          children: [
+                            // ContinueButton( MediaQuery.of(context).size.width / 4,inputText: 'KIM')
+                            LoginButton(
+                                textDisplay: "Log in",
+                                widthButton: 3.5,
+                                routeScreen: '/home'),
 
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: LoginButton("Continue as guest", null),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 23),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            OauthButton('assets/images/google_2.png'),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: LoginButton(
+                                  textDisplay: "Continue as guest",
+                                  routeScreen: '/home'),
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 34),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
+                      ),
+                      const SizedBox(height: 23),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          OauthButton('assets/images/google_2.png'),
+                        ],
+                      ),
+                      const SizedBox(height: 34),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                textAlign: TextAlign.center,
+                                "Need an account ?",
+                                style: GoogleFonts.inter(
+                                  shadows: [
+                                    const Shadow(
+                                      offset: Offset(0.0, 4.0),
+                                      blurRadius: 6.0,
+                                      color: Color.fromARGB(63, 0, 0, 0),
+                                    )
+                                  ],
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            const SizedBox(width: 15),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/sign-up');
+                              },
+                              child: Text(
                                   textAlign: TextAlign.center,
-                                  "Need an account ?",
+                                  "Sign Up",
                                   style: GoogleFonts.inter(
-                                    shadows: [
-                                      const Shadow(
-                                        offset: Offset(0.0, 4.0),
-                                        blurRadius: 6.0,
-                                        color: Color.fromARGB(63, 0, 0, 0),
-                                      )
-                                    ],
                                     color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
                                   )),
-                              const SizedBox(width: 15),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/sign-up');
-                                },
-                                child: Text(
-                                    textAlign: TextAlign.center,
-                                    "Sign Up",
-                                    style: GoogleFonts.inter(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ])
-                      ],
-                    ),
+                            ),
+                          ])
+                    ],
                   ),
                 ),
               ),

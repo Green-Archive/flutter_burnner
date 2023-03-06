@@ -1,52 +1,26 @@
 import 'package:flutter/material.dart';
-import '../pages/home_screen.dart';
+import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
 class LoginButton extends StatelessWidget {
-  final String? textDisplay;
+  final String textDisplay;
   final double? widthButton;
+  final String routeScreen;
 
-  const LoginButton(this.textDisplay, this.widthButton, {super.key});
+  const LoginButton({super.key,required this.textDisplay,this.widthButton,required, required this.routeScreen,});
+
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
-      },
-      child: SizedBox(
-        width: widthButton,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: const Color(0xff9747FF),
-              width: 4.0,
-            ),
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
-              child: Text(
-                // softWrap: true,
-                textAlign: TextAlign.center,
-                '${textDisplay}',
-                style:  GoogleFonts.inter(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+        Navigator.pushNamed(context, routeScreen);
+        },
+      child: ThemeApp.loginButtonShape(context:context,widthButton: widthButton, textDisplay: textDisplay),
     );
   }
+
 }
 
 class TextDisplay extends StatelessWidget {

@@ -18,7 +18,7 @@ class SelectDifficulty extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BackToTheFuture(),
+                Expanded(child: BackToTheFuture()),
                 Container(
                   width: MediaQuery.of(context).size.width / 1.5,
                   alignment: AlignmentDirectional.center,

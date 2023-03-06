@@ -20,15 +20,26 @@ class EasyPlay extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BackToTheFuture(),
+                  Expanded(child: BackToTheFuture()),
                   Container(),
                   Expanded(
-                    child: Container(
-                      alignment: AlignmentDirectional.topEnd,
-                      child: Icon(
-                        Icons.favorite,
-                        size: 35,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+
+                      children: [
+                        Icon(
+                          Icons.favorite,
+                          size: 35,
+                        ),
+                        Icon(
+                          Icons.favorite,
+                          size: 35,
+                        ),
+                        Icon(
+                          Icons.favorite,
+                          size: 35,
+                        ),
+                      ],
                     ),
                   ),
                 ],
