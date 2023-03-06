@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/components/normal_button.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
+import 'package:flutter_burnner/providers/counter_provider.dart';
+import 'package:provider/provider.dart';
 
-class EasyPlay extends StatelessWidget {
-  const EasyPlay({super.key});
+class EasyPlay extends StatefulWidget {
+  EasyPlay({super.key});
 
+  @override
+  _EasyPlayState createState() => _EasyPlayState();
+}
+
+class _EasyPlayState extends State<EasyPlay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,24 +28,30 @@ class EasyPlay extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(child: BackToTheFuture()),
-                  Container(),
+                  Container(
+                      child: Center(
+                          child: Text('1/3',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                              )))),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-
                       children: [
                         Icon(
                           Icons.favorite,
-                          size: 35,
+                          color: Colors.red[600],
+                          size: 30,
                         ),
-                        Icon(
-                          Icons.favorite,
-                          size: 35,
+                        SizedBox(
+                          width: 15,
                         ),
-                        Icon(
-                          Icons.favorite,
-                          size: 35,
-                        ),
+                        Text('${context.watch<Counter>().count}',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w800,
+                            ))
                       ],
                     ),
                   ),
@@ -62,9 +75,29 @@ class EasyPlay extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 )),
             const SizedBox(height: 30),
-            NormalButton('choice1', 1.2, 110, '/select-difficulty'),
+            InkWell(
+              onTap: () {
+                context.read<Counter>().increase();
+                print(context.read<Counter>().count);
+                // Navigator.pushNamed(context, '/select-difficulty');
+              },
+              child: ThemeApp.NomalButtonShape(
+                  context: context,
+                  widthButton: 1.2,
+                  heightButton: 110,
+                  textDisplay: 'choice1'),
+            ),
             const SizedBox(height: 15),
-            NormalButton('choice2', 1.2, 110, '/select-difficulty'),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/select-difficulty');
+              },
+              child: ThemeApp.NomalButtonShape(
+                  context: context,
+                  widthButton: 1.2,
+                  heightButton: 110,
+                  textDisplay: 'choice2'),
+            )
           ],
         ),
       ),
@@ -103,5 +136,14 @@ class DividerExample extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class Count extends StatelessWidget {
+  const Count({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('${context.watch<Counter>().count}');
   }
 }

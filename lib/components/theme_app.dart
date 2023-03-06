@@ -33,7 +33,7 @@ class ThemeApp {
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: const Color(0xff9747FF),
+            color: violetTheme,
             width: 4.0,
           ),
         ),
@@ -56,6 +56,34 @@ class ThemeApp {
       ),
     );
   }
+
+  static Container NomalButtonShape(
+      {required BuildContext context,required double widthButton,required double heightButton, required String textDisplay}) {
+
+
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(45.0),
+        border: Border.all(
+          color: ThemeApp.violetTheme,
+          width: 4.0,
+        ),
+      ),
+      width: MediaQuery.of(context).size.width / widthButton,
+      padding: EdgeInsets.all(20.0),
+      height: heightButton,
+      alignment: AlignmentDirectional.center,
+      child: Text('${textDisplay}',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.inter(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.black.withOpacity(0.8)))
+    );
+  }
+
 }
 
 class BackToTheFuture extends StatelessWidget {

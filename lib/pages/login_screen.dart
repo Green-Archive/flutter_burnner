@@ -121,6 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async{
+
+    showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(child: CircularProgressIndicator()));
+
     await _auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim()

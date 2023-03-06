@@ -28,8 +28,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Text(
-                        'Hello, ${user.email?.substring(0, 5)}',
+                        'Hello, \n${user.email?.substring(0, 10)}',
                         style: TextStyle(
+
                           fontFamily: 'Inter-Light',
                           fontSize: 24,
                           fontWeight: FontWeight.w400,
