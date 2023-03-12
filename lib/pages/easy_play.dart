@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/components/normal_button.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:provider/provider.dart';

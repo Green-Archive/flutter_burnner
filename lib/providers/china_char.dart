@@ -12,4 +12,7 @@ class QuestionChinaProvider with ChangeNotifier{
 
   ];
 
+  List<ChinaCharacters> getQuestionChina(){
+    return    chinaCharacters;
+  }
 }
