@@ -29,6 +29,13 @@
             {
               "client_id": "755198588899-j6vima2nvm4j3gs2gh4aflfs6b7ogb7i.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "755198588899-61ckhvjrdbbgs3remv921o1fu44hu7rn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterBurnner"
+              }
             }
           ]
         }
