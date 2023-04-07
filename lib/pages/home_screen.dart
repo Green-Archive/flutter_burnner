@@ -1,12 +1,40 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../components/theme_app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
+import '../models/user.dart';
 
 class HomeScreen extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser!;
+
+  // Future<UserModel?> readUser() async{
+  //   final docUser = FirebaseFirestore.instance.collection('users').doc(user.uid);
+  //   final snapshot = await docUser.get();
+  //
+  //   if (snapshot.exists) {
+  //     return UserModel.fromJson(snapshot.data()!);
+  //   }
+  //
+  // }
+
+  disPlayName()
+  {
+    if(user.isAnonymous == true)
+      {
+        return "Guest";
+      }
+
+    int? index = user.email?.indexOf('@');
+
+    if (index != -1) {
+      return user.email?.substring(0, index);
+    } else {
+      return user.email;
+    }
+  }
 
 
    HomeScreen({super.key});
@@ -28,7 +56,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Text(
-                        'Hello, \n${user.email?.substring(0, 10)}',
+                        'Hello, \n${
+                            disPlayName()
+                        }',
                         style: TextStyle(
 
                           fontFamily: 'Inter-Light',
