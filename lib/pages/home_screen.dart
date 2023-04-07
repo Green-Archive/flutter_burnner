@@ -8,8 +8,34 @@ class HomeScreen extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser!;
 
+  // Future<UserModel?> readUser() async{
+  //   final docUser = FirebaseFirestore.instance.collection('users').doc(user.uid);
+  //   final snapshot = await docUser.get();
+  //
+  //   if (snapshot.exists) {
+  //     return UserModel.fromJson(snapshot.data()!);
+  //   }
+  //
+  // }
 
-   HomeScreen({super.key});
+  disPlayName()
+  {
+    if(user.isAnonymous == true)
+    {
+      return "Guest";
+    }
+
+    int? index = user.email?.indexOf('@');
+
+    if (index != -1) {
+      return user.email?.substring(0, index);
+    } else {
+      return user.email;
+    }
+  }
+
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +54,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Text(
-                        'Hello, \n${user.email?.substring(0, 10)}',
+                        'Hello, \n${
+                            disPlayName()
+                        }',
                         style: TextStyle(
 
                           fontFamily: 'Inter-Light',
@@ -56,40 +84,40 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 60),
             Expanded(
                 child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      NormalButton(
-                          'Competition', 1.5, 130, '/select-difficulty')
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          NormalButton(
+                              'Competition', 1.5, 130, '/select-difficulty')
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
+                          NormalButton('Learning \n Content', 3, 130, '/easy-play')
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          NormalButton('Topic', 3.5, 80, '/easy-play'),
+                          NormalButton('Score', 3.5, 80, '/easy-play'),
+                          NormalButton('Settings', 3.5, 80, '/settings')
+                        ],
+                      )
                     ],
                   ),
-                  const SizedBox(height: 40),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
-                      NormalButton('Learning \n Content', 3, 130, '/easy-play')
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      NormalButton('Topic', 3.5, 80, '/easy-play'),
-                      NormalButton('Score', 3.5, 80, '/easy-play'),
-                      NormalButton('Settings', 3.5, 80, '/settings')
-                    ],
-                  )
-                ],
-              ),
-            ))
+                ))
           ],
         ),
       ),

@@ -120,6 +120,23 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Future signInAnon() async{
+
+    showDialog(context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(child: CircularProgressIndicator()));
+
+    await _auth.signInAnonymously().then((user) {
+
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      print("signed in ");
+    }).catchError((error) {
+      print(error);
+    });
+  }
+
   Future signIn() async{
 
     showDialog(context: context,
@@ -159,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
         required String routeScreen}) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, routeScreen);
+        signInAnon();
       },
       child: ThemeApp.loginButtonShape(
           context: context, textDisplay: textDisplay, widthButton: widthButton),
