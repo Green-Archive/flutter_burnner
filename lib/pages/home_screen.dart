@@ -25,6 +25,11 @@ class HomeScreen extends StatelessWidget {
       return "Guest";
     }
 
+    if (user.displayName != "null")
+      {
+        return user.displayName;
+      }
+
     int? index = user.email?.indexOf('@');
 
     if (index != -1) {
@@ -32,8 +37,8 @@ class HomeScreen extends StatelessWidget {
     } else {
       return user.email;
     }
-  }
 
+  }
 
   HomeScreen({super.key});
 
@@ -67,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                     ]),
                     Column(
                         mainAxisSize: MainAxisSize.max,
-                        children: const [UserProfile()]),
+                        children:  [UserProfile(photoUrl: user.photoURL)]),
                   ],
                 )),
             const SizedBox(height: 5),

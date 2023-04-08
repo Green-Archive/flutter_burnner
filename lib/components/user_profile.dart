@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+
+  final String? photoUrl;
+  const UserProfile({super.key,this.photoUrl});
+
+  photoRender()
+  {
+    if (photoUrl == null)
+      {
+        return Image.asset(
+          'assets/images/seki.png',
+        );
+      }
+
+    return Image.network(photoUrl!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +31,8 @@ class UserProfile extends StatelessWidget {
           borderRadius: borderRadius,
           child: SizedBox.fromSize(
             size: const Size.fromRadius(40), // Image radius
-            child: Image.asset(
-              'assets/images/seki.png',
-
-            ),
+            child:
+            photoRender(),
           ),
         ));
   }

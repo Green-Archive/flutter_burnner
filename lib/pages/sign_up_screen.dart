@@ -126,7 +126,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (password == confirmPassword && password.length >= 6) {
       _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((user) {
+          .then((authResult) {
+        final user = authResult.user;
+
+        //user.uid
+        //user.email
+        //await user?.updateDisplayName("Jane Q. User");
+        //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
+
+
         print("Sign up user successful.");
       }).catchError((error) {
         print(error.message);

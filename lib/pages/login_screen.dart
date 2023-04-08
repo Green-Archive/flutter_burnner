@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../components/login_text_box.dart';
+import '../components/showSnackbar.dart';
 import '../components/theme_app.dart';
 import '../components/oauth_button.dart';
 
@@ -71,8 +74,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 23),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          OauthButton('assets/images/google_2.png'),
+                        children:   [
+                          InkWell(
+                      onTap: () {
+                                signInWithGoogle(context);
+                              },
+                              child: OauthButton('assets/images/google_2.png',context)),
                         ],
                       ),
                       const SizedBox(height: 34),
@@ -137,6 +144,73 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  Future signInWithGoogle(BuildContext context) async {
+  try {
+  if (kIsWeb) {
+  GoogleAuthProvider googleProvider = GoogleAuthProvider();
+
+  googleProvider
+      .addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+  await _auth.signInWithPopup(googleProvider);
+  } else {
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  final GoogleSignInAuthentication? googleAuth =
+  await googleUser?.authentication;
+
+  if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+  accessToken: googleAuth?.accessToken,
+  idToken: googleAuth?.idToken,
+  );
+  UserCredential userCredential =
+  await _auth.signInWithCredential(credential);
+
+  // if you want to do specific task like storing information in firestore
+  // only for new users using google sign in (since there are no two options
+  // for google sign in and google sign up, only one as of now),
+  // do the following:
+
+  // if (userCredential.user != null) {
+  //   if (userCredential.additionalUserInfo!.isNewUser) {}
+  // }
+  }
+  }
+  Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  print("signed in ");
+  } on FirebaseAuthException catch (e) {
+    showSnackBar(context, e.message!);
+  print( e.message!); // Displaying the error message
+  }
+}
+  // {
+  //   // Trigger the authentication flow
+  //   final GoogleSignInAccount? googleUser = await GoogleSignIn(
+  //       scopes: <String>["email"]).signIn();
+  //
+  //   // Obtain the auth details from the request
+  //   final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+  //
+  //   // Create a new credential
+  //   final credential = GoogleAuthProvider.credential(
+  //     accessToken: googleAuth.accessToken,
+  //     idToken: googleAuth.idToken,
+  //   );
+  //
+  //   // Once signed in, return the UserCredential
+  //   await _auth.signInWithCredential(credential).then((user) {
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (context) => HomeScreen()));
+  //     print("signed in ");
+  //   }).catchError((error) {
+  //     print(error);
+  //   });
+  //
+  // }
+
   Future signIn() async{
 
     showDialog(context: context,
@@ -151,6 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
       print("signed in ");
     }).catchError((error) {
+
       print(error);
     });
   }
@@ -200,6 +275,32 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ));
+  }
+
+  Widget OauthButton(String pathImageFileName, BuildContext context)
+  {
+
+
+  return Container(
+        width: 64,
+        height: 64,
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(pathImageFileName),
+              fit: BoxFit.fill,
+            ),
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.transparent,
+            border: Border.all(
+              color: Colors.white,
+              width: 3.0,
+            )),
+
+        // child:
+
+    );
+
   }
 
 

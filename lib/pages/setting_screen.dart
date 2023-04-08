@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math' as math;
+import '../components/showSnackbar.dart';
 import '../components/theme_app.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -57,7 +58,13 @@ class SettingScreen extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                FirebaseAuth.instance.signOut();
+                try {
+                  FirebaseAuth.instance.signOut();
+
+                } on FirebaseAuthException catch (e) {
+                  showSnackBar(context, e.message!); // Displaying the error message
+                }
+                // FirebaseAuth.instance.signOut();
             Navigator.pushNamed(context, '/login');
             },
               child: Row(
