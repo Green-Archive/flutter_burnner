@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../components/showSnackbar.dart';
@@ -9,14 +7,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TestKim extends StatelessWidget {
   const TestKim({Key? key}) : super(key: key);
 
-  Future createUser(BuildContext context) async {
-    final docUser = FirebaseFirestore.instance.collection("users");
+  Future testAdd(BuildContext context) async {
+    final docUser = FirebaseFirestore.instance.collection("test-kim");
 
-    final json = {'username': "comfy time", 'email': "kim.warit@hotmail.com"};
+    final json = {'test_1': "comfy time", 'test_2': "Pastel"};
 
     await docUser
         .add(json)
-        .then((value) => showSnackBar(context, "User Added"))
+        .then((value) => showSnackBar(context, "test-kim Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
 
@@ -63,7 +61,7 @@ class TestKim extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                createUser(context);
+                testAdd(context);
               },
               child:
                   testButton(titleName: "Kim", iconName: Icons.perm_identity),
@@ -85,12 +83,14 @@ class TestKim extends StatelessWidget {
         SizedBox(
           width: 20,
         ),
-        Text('${titleName}',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-            ))
+        Flexible(
+          child: Text('${titleName}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              )),
+        )
       ],
     );
   }

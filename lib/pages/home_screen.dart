@@ -53,20 +53,27 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Text("Hello,",
+                            style: TextStyle(
+                              fontFamily: 'Inter-Light',
+                              fontSize: 50,
+                              fontWeight: FontWeight.w400,
+                            )),
                         Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [UserProfile(photoUrl: user.photoURL)]),
                       ],
                     ),
+                    const SizedBox(height: 5),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Text(
-                            'Hello, \n${disPlayName()}',
+                            '${disPlayName()}',
                             style: TextStyle(
                               fontFamily: 'Inter-Light',
                               fontSize: 24,
@@ -74,11 +81,15 @@ class HomeScreen extends StatelessWidget {
                             ),
                           )
                         ]),
+
+                        // Column(
+                        //     mainAxisSize: MainAxisSize.max,
+                        //     children: [UserProfile(photoUrl: user.photoURL)]),
                       ],
                     ),
                   ],
                 )),
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
             Container(
               alignment: AlignmentDirectional.topStart,
               padding: const EdgeInsets.only(left: 36.0),

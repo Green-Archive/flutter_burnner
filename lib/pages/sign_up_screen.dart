@@ -4,6 +4,7 @@ import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../components/login_text_box.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -15,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmController = TextEditingController();
@@ -53,6 +55,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
+                    LoginTextBox(
+                        titleName: 'Username',
+                        iconName: Icons.person,
+                        textController: usernameController),
+                    const SizedBox(height: 25),
                     LoginTextBox(
                         titleName: 'Email',
                         iconName: Icons.email,
@@ -119,15 +126,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+
+
   signUp() {
+    String username = usernameController.text.trim();
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String confirmPassword = confirmController.text.trim();
+
     if (password == confirmPassword && password.length >= 6) {
       _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((authResult) {
         final user = authResult.user;
+        final db = FirebaseFirestore.instance;
+
+        if (user == null)
+          {
+            throw Exception('User is null');
+          }
+
+        db
+            .collection("users")
+            .doc(username)
+            .set({
+              "username": username,
+              "uid": user.uid,
+              "email": user.email
+                });
 
         //user.uid
         //user.email
