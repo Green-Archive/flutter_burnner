@@ -4,6 +4,7 @@ import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
+import 'package:flutter_burnner/pages/test_kim.dart';
 import 'package:flutter_burnner/providers/china_char.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'pages/login_screen.dart';
@@ -39,6 +40,7 @@ Future main() async {
           '/sign-up': (ctx) => SignUpScreen(),
           '/home': (ctx) => HomeScreen(),
           '/settings': (ctx) => SettingScreen(),
+          '/test-kim': (ctx) => TestKim(),
         },
       ),
     ),

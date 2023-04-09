@@ -17,9 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -74,12 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 23),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children:   [
+                        children: [
                           InkWell(
-                      onTap: () {
+                              onTap: () {
                                 signInWithGoogle(context);
                               },
-                              child: OauthButton('assets/images/google_2.png',context)),
+                              child: OauthButton(
+                                  'assets/images/google_2.png', context)),
                         ],
                       ),
                       const SizedBox(height: 34),
@@ -127,17 +126,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future signInAnon() async{
+  Future signInAnon() async {
 
-    showDialog(context: context,
-        barrierDismissible: false,
-        builder: (context) => Center(child: CircularProgressIndicator()));
 
     await _auth.signInAnonymously().then((user) {
 
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.pushReplacementNamed(context, "/home");
+
       print("signed in ");
     }).catchError((error) {
       print(error);
@@ -145,87 +143,79 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signInWithGoogle(BuildContext context) async {
-  try {
-  if (kIsWeb) {
-  GoogleAuthProvider googleProvider = GoogleAuthProvider();
+    try {
+      if (kIsWeb) {
+        GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
-  googleProvider
-      .addScope('https://www.googleapis.com/auth/contacts.readonly');
+        googleProvider
+            .addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-  await _auth.signInWithPopup(googleProvider);
-  } else {
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  final GoogleSignInAuthentication? googleAuth =
-  await googleUser?.authentication;
 
-  if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
-  // Create a new credential
-  final credential = GoogleAuthProvider.credential(
-  accessToken: googleAuth?.accessToken,
-  idToken: googleAuth?.idToken,
-  );
-  UserCredential userCredential =
-  await _auth.signInWithCredential(credential);
+        await _auth.signInWithPopup(googleProvider);
+      } else {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  // if you want to do specific task like storing information in firestore
-  // only for new users using google sign in (since there are no two options
-  // for google sign in and google sign up, only one as of now),
-  // do the following:
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => Center(child: CircularProgressIndicator()));
 
-  // if (userCredential.user != null) {
-  //   if (userCredential.additionalUserInfo!.isNewUser) {}
-  // }
+        final GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
+
+        if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
+          // Create a new credential
+          final credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken,
+            idToken: googleAuth?.idToken,
+          );
+          UserCredential userCredential =
+              await _auth.signInWithCredential(credential);
+
+          // if you want to do specific task like storing information in firestore
+          // only for new users using google sign in (since there are no two options
+          // for google sign in and google sign up, only one as of now),
+          // do the following:
+
+          // if (userCredential.user != null) {
+          //   if (userCredential.additionalUserInfo!.isNewUser) {}
+          // }
+        }
+      }
+      showSnackBar(context, "signed in ");
+
+      Navigator.pushReplacementNamed(context, "/home");
+
+
+      print("signed in ");
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message!);
+      print(e.message!); // Displaying the error message
+    }
   }
-  }
-  Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => HomeScreen()));
-  print("signed in ");
-  } on FirebaseAuthException catch (e) {
-    showSnackBar(context, e.message!);
-  print( e.message!); // Displaying the error message
-  }
-}
-  // {
-  //   // Trigger the authentication flow
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn(
-  //       scopes: <String>["email"]).signIn();
-  //
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-  //
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //
-  //   // Once signed in, return the UserCredential
-  //   await _auth.signInWithCredential(credential).then((user) {
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (context) => HomeScreen()));
-  //     print("signed in ");
-  //   }).catchError((error) {
-  //     print(error);
-  //   });
-  //
-  // }
 
-  Future signIn() async{
 
-    showDialog(context: context,
+  Future signIn() async {
+    showDialog(
+        context: context,
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator()));
 
-    await _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim()
-    ).then((user) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    await _auth
+        .signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
+        .then((user) {
+
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
+      Navigator.pushReplacementNamed(context, "/home");
+
+
       print("signed in ");
     }).catchError((error) {
-
       print(error);
     });
   }
@@ -246,9 +236,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget guestButton(
       {required BuildContext context,
-        required String textDisplay,
-        double? widthButton,
-        required String routeScreen}) {
+      required String textDisplay,
+      double? widthButton,
+      required String routeScreen}) {
     return InkWell(
       onTap: () {
         signInAnon();
@@ -257,7 +247,6 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context, textDisplay: textDisplay, widthButton: widthButton),
     );
   }
-
 
   Widget logoOtter() {
     final borderRadius = BorderRadius.circular(15); // Image border
@@ -277,37 +266,24 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  Widget OauthButton(String pathImageFileName, BuildContext context)
-  {
+  Widget OauthButton(String pathImageFileName, BuildContext context) {
+    return Container(
+      width: 64,
+      height: 64,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(pathImageFileName),
+            fit: BoxFit.fill,
+          ),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.transparent,
+          border: Border.all(
+            color: Colors.white,
+            width: 3.0,
+          )),
 
-
-  return Container(
-        width: 64,
-        height: 64,
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(pathImageFileName),
-              fit: BoxFit.fill,
-            ),
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.transparent,
-            border: Border.all(
-              color: Colors.white,
-              width: 3.0,
-            )),
-
-        // child:
-
+      // child:
     );
-
   }
-
-
 }
-
-
-
-
-
-

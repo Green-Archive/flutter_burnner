@@ -53,26 +53,36 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 60),
             Padding(
                 padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                child: Row(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(mainAxisSize: MainAxisSize.max, children: [
-                      Text(
-                        'Hello, \n${
-                            disPlayName()
-                        }',
-                        style: TextStyle(
-
-                          fontFamily: 'Inter-Light',
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ]),
-                    Column(
+                    Row(
                         mainAxisSize: MainAxisSize.max,
-                        children:  [UserProfile(photoUrl: user.photoURL)]),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                      children: [Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children:  [UserProfile(photoUrl: user.photoURL)]),],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(mainAxisSize: MainAxisSize.max, children: [
+                          Text(
+                            'Hello, \n${
+                                disPlayName()
+                            }',
+                            style: TextStyle(
+
+                              fontFamily: 'Inter-Light',
+                              fontSize: 24,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ]),
+
+                      ],
+                    ),
                   ],
                 )),
             const SizedBox(height: 5),
@@ -105,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
-                          NormalButton('Learning \n Content', 3, 130, '/easy-play')
+                          NormalButton('Test \n Content', 3, 130, '/test-kim')
                         ],
                       ),
                       const SizedBox(
