@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {
-
   final String? photoUrl;
-  const UserProfile({super.key,this.photoUrl});
+  const UserProfile({super.key, this.photoUrl});
 
-  photoRender()
-  {
-    if (photoUrl == null)
-      {
-        return Image.asset(
-          'assets/images/seki.png',
-        );
-      }
+  photoRender() {
+    if (photoUrl == null) {
+      return Image.asset(
+        'assets/images/seki.png',
+      );
+    }
 
     return Image.network(photoUrl!);
   }
@@ -31,8 +28,7 @@ class UserProfile extends StatelessWidget {
           borderRadius: borderRadius,
           child: SizedBox.fromSize(
             size: const Size.fromRadius(40), // Image radius
-            child:
-            photoRender(),
+            child: photoRender(),
           ),
         ));
   }

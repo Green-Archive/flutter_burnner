@@ -5,7 +5,6 @@ import '../components/normal_button.dart';
 import '../components/user_profile.dart';
 
 class HomeScreen extends StatelessWidget {
-
   final user = FirebaseAuth.instance.currentUser!;
 
   // Future<UserModel?> readUser() async{
@@ -18,17 +17,14 @@ class HomeScreen extends StatelessWidget {
   //
   // }
 
-  disPlayName()
-  {
-    if(user.isAnonymous == true)
-    {
+  disPlayName() {
+    if (user.isAnonymous == true) {
       return "Guest";
     }
 
-    if (user.displayName != "null")
-      {
-        return user.displayName;
-      }
+    if (user.displayName != "null") {
+      return user.displayName;
+    }
 
     int? index = user.email?.indexOf('@');
 
@@ -37,7 +33,6 @@ class HomeScreen extends StatelessWidget {
     } else {
       return user.email;
     }
-
   }
 
   HomeScreen({super.key});
@@ -57,11 +52,13 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                      children: [Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children:  [UserProfile(photoUrl: user.photoURL)]),],
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [UserProfile(photoUrl: user.photoURL)]),
+                      ],
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -69,18 +66,14 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Text(
-                            'Hello, \n${
-                                disPlayName()
-                            }',
+                            'Hello, \n${disPlayName()}',
                             style: TextStyle(
-
                               fontFamily: 'Inter-Light',
                               fontSize: 24,
                               fontWeight: FontWeight.w400,
                             ),
                           )
                         ]),
-
                       ],
                     ),
                   ],
@@ -99,40 +92,40 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 60),
             Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          NormalButton(
-                              'Competition', 1.5, 130, '/select-difficulty')
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
-                          NormalButton('Test \n Content', 3, 130, '/test-kim')
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          NormalButton('Topic', 3.5, 80, '/easy-play'),
-                          NormalButton('Score', 3.5, 80, '/easy-play'),
-                          NormalButton('Settings', 3.5, 80, '/settings')
-                        ],
-                      )
+                      NormalButton(
+                          'Competition', 1.5, 130, '/select-difficulty')
                     ],
                   ),
-                ))
+                  const SizedBox(height: 40),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
+                      NormalButton('Test \n Content', 3, 130, '/test-kim')
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      NormalButton('Topic', 3.5, 80, '/easy-play'),
+                      NormalButton('Score', 3.5, 80, '/easy-play'),
+                      NormalButton('Settings', 3.5, 80, '/settings')
+                    ],
+                  )
+                ],
+              ),
+            ))
           ],
         ),
       ),

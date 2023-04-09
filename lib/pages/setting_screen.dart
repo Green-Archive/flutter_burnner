@@ -39,12 +39,14 @@ class SettingScreen extends StatelessWidget {
             ),
             Row(
               children: [
-                Icon(Icons.manage_accounts,
+                Icon(
+                  Icons.manage_accounts,
                   size: 40,
-                  color: Colors.white,),
-
-                SizedBox(width: 20,),
-
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
                 Text("Edit profile",
                     style: TextStyle(
                       color: Colors.white,
@@ -57,28 +59,30 @@ class SettingScreen extends StatelessWidget {
               height: 25,
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 try {
                   FirebaseAuth.instance.signOut();
-
                 } on FirebaseAuthException catch (e) {
-                  showSnackBar(context, e.message!); // Displaying the error message
+                  showSnackBar(
+                      context, e.message!); // Displaying the error message
                 }
                 // FirebaseAuth.instance.signOut();
-            Navigator.pushNamed(context, '/login');
-            },
+                Navigator.pushNamed(context, '/login');
+              },
               child: Row(
                 children: [
                   Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationY(math.pi),
-                    child: Icon(Icons.exit_to_app,
-                    size: 40,
-                    color: Colors.white,),
+                    child: Icon(
+                      Icons.exit_to_app,
+                      size: 40,
+                      color: Colors.white,
+                    ),
                   ),
-
-                  SizedBox(width: 20,),
-
+                  SizedBox(
+                    width: 20,
+                  ),
                   Text("Log out",
                       style: TextStyle(
                         color: Colors.white,
@@ -88,10 +92,6 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-
-
-
           ]),
         ),
       ),

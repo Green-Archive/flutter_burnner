@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../pages/home_screen.dart';
 
-
 // class MyHomePage extends StatelessWidget {
 //   const MyHomePage({Key? key}) : super(key: key);
 //
@@ -29,8 +28,8 @@ class ContinueButton extends StatefulWidget {
   final String inputText;
   final double? inputWidth;
 
-
-  const ContinueButton(this.inputWidth,{Key? key, required this.inputText}) : super(key: key);
+  const ContinueButton(this.inputWidth, {Key? key, required this.inputText})
+      : super(key: key);
   @override
   State<ContinueButton> createState() => _ContinueButtonState();
 }
@@ -56,7 +55,7 @@ class _ContinueButtonState extends State<ContinueButton> {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -67,12 +66,11 @@ class _ContinueButtonState extends State<ContinueButton> {
               width: 4.0,
             ),
           ),
-          child:  Center(
+          child: Center(
             child: Padding(
-              padding: EdgeInsets.only(
-                  left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
-              child:  Text(displayText)
-            ),
+                padding: EdgeInsets.only(
+                    left: 5.0, top: 10.0, right: 10.0, bottom: 10.0),
+                child: Text(displayText)),
           ),
         ),
       ),

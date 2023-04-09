@@ -3,5 +3,6 @@ class ChinaCharacters {
   String correct;
   String wrong;
 
-  ChinaCharacters({required this.character, required this.correct, required this.wrong});
+  ChinaCharacters(
+      {required this.character, required this.correct, required this.wrong});
 }

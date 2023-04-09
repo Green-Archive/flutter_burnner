@@ -127,10 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signInAnon() async {
-
-
     await _auth.signInAnonymously().then((user) {
-
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
@@ -149,8 +146,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
         googleProvider
             .addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-
 
         await _auth.signInWithPopup(googleProvider);
       } else {
@@ -187,14 +182,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
       Navigator.pushReplacementNamed(context, "/home");
 
-
       print("signed in ");
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
       print(e.message!); // Displaying the error message
     }
   }
-
 
   Future signIn() async {
     showDialog(
@@ -207,12 +200,10 @@ class _LoginScreenState extends State<LoginScreen> {
             email: emailController.text.trim(),
             password: passwordController.text.trim())
         .then((user) {
-
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
       Navigator.pushReplacementNamed(context, "/home");
-
 
       print("signed in ");
     }).catchError((error) {

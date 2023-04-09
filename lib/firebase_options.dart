@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '755198588899',
     projectId: 'flutter-burnner',
     storageBucket: 'flutter-burnner.appspot.com',
-    iosClientId: '755198588899-61ckhvjrdbbgs3remv921o1fu44hu7rn.apps.googleusercontent.com',
+    iosClientId:
+        '755198588899-61ckhvjrdbbgs3remv921o1fu44hu7rn.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterBurnner',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '755198588899',
     projectId: 'flutter-burnner',
     storageBucket: 'flutter-burnner.appspot.com',
-    iosClientId: '755198588899-61ckhvjrdbbgs3remv921o1fu44hu7rn.apps.googleusercontent.com',
+    iosClientId:
+        '755198588899-61ckhvjrdbbgs3remv921o1fu44hu7rn.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterBurnner',
   );
 }

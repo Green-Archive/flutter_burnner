@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class LoginTextBox extends StatelessWidget {
-
   final String titleName;
   final IconData iconName;
   final TextEditingController textController;
 
   const LoginTextBox(
-      {super.key, required this.titleName, required this.iconName, required this.textController});
+      {super.key,
+      required this.titleName,
+      required this.iconName,
+      required this.textController});
 
   @override
   Widget build(BuildContext context) {

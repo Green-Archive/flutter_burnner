@@ -9,12 +9,12 @@ class NormalButton extends StatelessWidget {
   final double heightButton;
 
   // const NormalButton({super.key});
-  const NormalButton(this.textDisplay, this.widthButton,this.heightButton, this.routeScreen,
+  const NormalButton(
+      this.textDisplay, this.widthButton, this.heightButton, this.routeScreen,
       {super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, routeScreen);

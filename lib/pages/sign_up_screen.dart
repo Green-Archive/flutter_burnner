@@ -134,7 +134,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         //await user?.updateDisplayName("Jane Q. User");
         //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
 
-
         print("Sign up user successful.");
       }).catchError((error) {
         print(error.message);

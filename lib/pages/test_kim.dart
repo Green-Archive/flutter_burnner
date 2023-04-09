@@ -10,18 +10,14 @@ class TestKim extends StatelessWidget {
   const TestKim({Key? key}) : super(key: key);
 
   Future createUser(BuildContext context) async {
-
     final docUser = FirebaseFirestore.instance.collection("users");
 
-    final json = {
-      'username': "comfy time",
-      'email': "kim.warit@hotmail.com"
-    };
+    final json = {'username': "comfy time", 'email': "kim.warit@hotmail.com"};
 
-    await docUser.add(json)
-        .then((value) => showSnackBar(context,"User Added"))
+    await docUser
+        .add(json)
+        .then((value) => showSnackBar(context, "User Added"))
         .catchError((error) => print("Failed to add user: $error"));
-
   }
 
   @override
@@ -51,52 +47,44 @@ class TestKim extends StatelessWidget {
                 Expanded(child: Container())
               ],
             ),
-
             const SizedBox(
               height: 25,
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 showSnackBar(context, "test");
               },
               child: testButton(
-                titleName: "Test onTap show SnackBar",
-                iconName: Icons.telegram
+                  titleName: "Test onTap show SnackBar",
+                  iconName: Icons.telegram),
             ),
-            ),
-
             const SizedBox(
               height: 25,
             ),
             InkWell(
-              onTap: (){
+              onTap: () {
                 createUser(context);
               },
-              child: testButton(
-                titleName: "Kim",
-                iconName: Icons.perm_identity
-              ),
+              child:
+                  testButton(titleName: "Kim", iconName: Icons.perm_identity),
             ),
-
-
-
           ]),
         ),
       ),
     );
   }
 
-  testButton({required String titleName, required IconData iconName})
-  {
-
+  testButton({required String titleName, required IconData iconName}) {
     return Row(
       children: [
-        Icon(iconName,
+        Icon(
+          iconName,
           size: 40,
-          color: Colors.white,),
-
-        SizedBox(width: 20,),
-
+          color: Colors.white,
+        ),
+        SizedBox(
+          width: 20,
+        ),
         Text('${titleName}',
             style: TextStyle(
               color: Colors.white,
@@ -106,5 +94,4 @@ class TestKim extends StatelessWidget {
       ],
     );
   }
-
 }
