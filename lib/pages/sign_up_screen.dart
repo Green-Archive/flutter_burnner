@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/components/showSnackbar.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -126,55 +127,68 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Future signUp(BuildContext context) async {
+    try {
+      String username = usernameController.text.trim();
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
+      String confirmPassword = confirmController.text.trim();
 
+      if (username == '') {
+        showSnackBar(context, "Password and Confirm-password is not match.");
+        throw ('User is null');
+      }
 
-  signUp() {
-    String username = usernameController.text.trim();
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
-    String confirmPassword = confirmController.text.trim();
+      if (password != confirmPassword) {
+        showSnackBar(context, "Password and Confirm-password is not match.");
+        throw ("Password and Confirm-password is not match.");
+      }
 
-    if (password == confirmPassword && password.length >= 6) {
-      _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((authResult) {
-        final user = authResult.user;
-        final db = FirebaseFirestore.instance;
+      final UserCredential authResult = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final User? user = authResult.user;
 
-        if (user == null)
-          {
-            throw Exception('User is null');
-          }
+      final db = FirebaseFirestore.instance;
 
-        db
-            .collection("users")
-            .doc(username)
-            .set({
-              "username": username,
-              "uid": user.uid,
-              "email": user.email
-                });
+      if (user == null) {
+        throw ('User is null');
+      }
 
-        //user.uid
-        //user.email
-        //await user?.updateDisplayName("Jane Q. User");
-        //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
-
-        print("Sign up user successful.");
-      }).catchError((error) {
-        print(error.message);
+      db.collection("users").doc(username).set({
+        "username": username,
+        "uid": user.uid,
+        "email": user.email
+      }).then((value) {
+        Navigator.pushNamedAndRemoveUntil(
+                context, '/login', ModalRoute.withName('/home'))
+            .then((value) => null);
+      }).catchError((e) {
+        print("Error : ${e}");
+        showSnackBar(
+            context, "db error"); // Displaying the usual firebase error message
       });
-    } else {
-      print("Password and Confirm-password is not match.");
+
+      //user.uid
+      //user.email
+      //await user?.updateDisplayName("Jane Q. User");
+      //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
+      // });
+    } on FirebaseAuthException catch (e) {
+      // if you want to display your own custom error message
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+      showSnackBar(
+          context, e.message!); // Displaying the usual firebase error message
     }
   }
 
   Widget buildButtonSignUp({required BuildContext context}) {
     return InkWell(
       onTap: () {
-        signUp();
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/login', ModalRoute.withName('/home'));
+        signUp(context);
       },
       child: ThemeApp.loginButtonShape(
           context: context, textDisplay: 'Sign up', widthButton: 3.5),
