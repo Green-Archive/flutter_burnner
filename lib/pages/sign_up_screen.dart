@@ -16,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -144,35 +145,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
         throw ("Password and Confirm-password is not match.");
       }
 
-      final UserCredential authResult = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      final User? user = authResult.user;
+      // we get the registered usernames from our database
+      final usernames = await _db.collection('users').doc("username").get();
+      final data = usernames.data() as Map<String, dynamic>;
 
-      final db = FirebaseFirestore.instance;
+      // we return that if a key with that username exists
+      // return data.containsKey(username);
 
-      if (user == null) {
-        throw ('User is null');
-      }
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((authResult) {
+        User? user = authResult.user;
 
-      db.collection("users").doc(username).set({
-        "username": username,
-        "uid": user.uid,
-        "email": user.email
-      }).then((value) {
-        Navigator.pushNamedAndRemoveUntil(
-                context, '/login', ModalRoute.withName('/home'))
-            .then((value) => null);
-      }).catchError((e) {
-        print("Error : ${e}");
-        showSnackBar(
-            context, "db error"); // Displaying the usual firebase error message
+        if (user == null) {
+          throw ('User is null');
+        }
+
+        //user.uid
+        //user.email
+        //await user?.updateDisplayName("Jane Q. User");
+        //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
+
+        _db.collection("users").doc(user.uid).set({
+          "username": username, // Full Name I will edit later
+          "uid": user.uid,
+          "email": user.email
+        }).then((value) {
+          print("Sign up user successful.");
+          showSnackBar(context, "Sign up user successful.");
+          Navigator.pop(context);
+        }).catchError((e) {
+          print("Error : ${e}");
+          showSnackBar(context,
+              "db error"); // Displaying the usual firebase error message
+        });
       });
-
-      //user.uid
-      //user.email
-      //await user?.updateDisplayName("Jane Q. User");
-      //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
-      // });
     } on FirebaseAuthException catch (e) {
       // if you want to display your own custom error message
       if (e.code == 'weak-password') {
@@ -182,6 +189,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
       showSnackBar(
           context, e.message!); // Displaying the usual firebase error message
+    } catch (e) {
+      print("Error Something : ${e}");
+      showSnackBar(context, "${e}");
     }
   }
 
