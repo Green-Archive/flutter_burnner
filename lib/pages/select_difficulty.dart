@@ -1,4 +1,6 @@
+import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../components/normal_button.dart';
 import '../components/theme_app.dart';
 
@@ -7,6 +9,15 @@ class SelectDifficulty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // WidgetsBinding.instance
+    //     .addPostFrameCallback((_) {
+    //
+    //   Future.delayed(Duration.zero, () {
+    //     context.read<CounterStrike>().increase();
+    //   });
+    //
+    // });
+
     return Scaffold(
       body: Container(
         decoration: ThemeApp.background(),

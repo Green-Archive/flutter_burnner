@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
-class Counter with ChangeNotifier {
+class CounterStrike with ChangeNotifier {
   int _count = 0;
 
   int get count => _count;
 
-  void setCount(int count){
+  void setCount(int count) {
     _count = count;
     notifyListeners();
-
   }
 
   void increase() {

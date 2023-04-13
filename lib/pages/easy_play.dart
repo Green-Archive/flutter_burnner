@@ -3,6 +3,8 @@ import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/heart.dart';
+
 class EasyPlay extends StatefulWidget {
   EasyPlay({super.key});
 
@@ -15,8 +17,7 @@ class _EasyPlayState extends State<EasyPlay> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      context.read<Counter>().setCount(0);
-      // Provider.of<Counter>(context).setCount(50);
+      context.read<Heart>().startHeart(3);
     });
   }
 
@@ -55,7 +56,7 @@ class _EasyPlayState extends State<EasyPlay> {
                         SizedBox(
                           width: 15,
                         ),
-                        Count(),
+                        HeartRemain(),
                       ],
                     ),
                   ),
@@ -80,11 +81,7 @@ class _EasyPlayState extends State<EasyPlay> {
                 )),
             const SizedBox(height: 30),
             InkWell(
-              onTap: () {
-                context.read<Counter>().increase();
-                print(context.read<Counter>().count);
-                // Navigator.pushNamed(context, '/select-difficulty');
-              },
+              onTap: () {},
               child: ThemeApp.NomalButtonShape(
                   context: context,
                   widthButton: 1.2,
@@ -93,9 +90,7 @@ class _EasyPlayState extends State<EasyPlay> {
             ),
             const SizedBox(height: 15),
             InkWell(
-              onTap: () {
-                // context.read<Counter>().setCount(5);
-              },
+              onTap: () {},
               child: ThemeApp.NomalButtonShape(
                   context: context,
                   widthButton: 1.2,
@@ -143,12 +138,12 @@ class DividerExample extends StatelessWidget {
   }
 }
 
-class Count extends StatelessWidget {
-  const Count({super.key});
+class HeartRemain extends StatelessWidget {
+  const HeartRemain({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Text('${context.watch<Counter>().count}',
+    return Text('${context.watch<Heart>().getHeart}',
         style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w800,

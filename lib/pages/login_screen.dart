@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-      Navigator.pushReplacementNamed(context, "/home");
+      // Navigator.pushReplacementNamed(context, "/home");
 
       print("signed in ");
     }).catchError((error) {
@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       showSnackBar(context, "signed in ");
 
-      Navigator.pushReplacementNamed(context, "/home");
+      // Navigator.pushReplacementNamed(context, "/home");
 
       print("signed in ");
     } on FirebaseAuthException catch (e) {
@@ -203,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-      Navigator.pushReplacementNamed(context, "/home");
+      // Navigator.pushReplacementNamed(context, "/home");
 
       print("signed in ");
     }).catchError((error) {

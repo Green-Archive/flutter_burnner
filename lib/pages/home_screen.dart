@@ -1,21 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/providers/counter_provider.dart';
+import 'package:provider/provider.dart';
 import '../components/theme_app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
+import '../providers/china_char.dart';
 
 class HomeScreen extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
-
-  // Future<UserModel?> readUser() async{
-  //   final docUser = FirebaseFirestore.instance.collection('users').doc(user.uid);
-  //   final snapshot = await docUser.get();
-  //
-  //   if (snapshot.exists) {
-  //     return UserModel.fromJson(snapshot.data()!);
-  //   }
-  //
-  // }
 
   disPlayName() {
     if (user.isAnonymous == true) {
@@ -39,6 +32,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<QuestionChinaProvider>().initialD();
+    });
+
     return Scaffold(
       body: Container(
         decoration: ThemeApp.background(),
@@ -111,9 +108,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       NormalButton(
                           'Competition', 1.5, 130, '/select-difficulty',
-                          run: () {
-                        print("kim");
-                      })
+                          run: () {})
                     ],
                   ),
                   const SizedBox(height: 40),

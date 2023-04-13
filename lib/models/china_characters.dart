@@ -6,6 +6,15 @@ class ChinaCharacters {
   final String? pinyin;
   final String? POS;
 
+  String toString()
+  {
+    return "Character = ${character} "
+        "Meaning = ${eng_meaning} "
+        "Pinyin = ${pinyin} "
+        "Part of speech = ${POS} ";
+  }
+
+
   ChinaCharacters({
     this.character,
     this.eng_meaning,

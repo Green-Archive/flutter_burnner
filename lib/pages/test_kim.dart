@@ -93,7 +93,7 @@ class TestKim extends StatelessWidget {
                 iconName: Icons.text_increase,
                 run: () {
                   // context.read<QuestionChinaProvider>().initialD;
-                  context.read<Counter>().increase();
+                  context.read<CounterStrike>().increase();
                 }),
             const SizedBox(
               height: 25,
@@ -102,7 +102,7 @@ class TestKim extends StatelessWidget {
                 titleName: "Initial D",
                 iconName: Icons.car_crash,
                 run: () {
-                  context.read<QuestionChinaProvider>().InitialD();
+                  context.read<QuestionChinaProvider>().initialD();
                 }),
             const SizedBox(
               height: 25,
