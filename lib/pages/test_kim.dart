@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import '../components/showSnackbar.dart';
 import '../components/theme_app.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_burnner/providers/counter_provider.dart';
+
+import '../providers/china_char.dart';
 
 class TestKim extends StatelessWidget {
-  const TestKim({Key? key}) : super(key: key);
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  TestKim({Key? key}) : super(key: key);
 
   Future testAdd(BuildContext context) async {
     final docUser = FirebaseFirestore.instance.collection("test-kim");
@@ -42,56 +46,112 @@ class TestKim extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                       )),
                 ),
-                Expanded(child: Container())
+                Expanded(
+                    child: Container(
+
+                        // child: Text('${context.watch<QuestionChinaProvider>().getChina}',
+                        //     style: TextStyle(
+                        //       fontSize: 25,
+                        //       fontWeight: FontWeight.w800,
+                        //     )),
+
+                        ))
               ],
             ),
             const SizedBox(
               height: 25,
             ),
-            InkWell(
-              onTap: () {
-                showSnackBar(context, "test");
-              },
-              child: testButton(
-                  titleName: "Test onTap show SnackBar",
-                  iconName: Icons.telegram),
-            ),
+            testButton(
+                titleName: "Test onTap show SnackBar",
+                iconName: Icons.telegram,
+                run: () {
+                  _db.collection("test-kim").get().then(
+                    (querySnapshot) {
+                      print("Successfully completed");
+                      for (var docSnapshot in querySnapshot.docs) {
+                        print('${docSnapshot.id} => ${docSnapshot.data()}');
+                      }
+                    },
+                    onError: (e) => print("Error completing: $e"),
+                  );
+                  showSnackBar(context, "test");
+                }),
             const SizedBox(
               height: 25,
             ),
-            InkWell(
-              onTap: () {
-                testAdd(context);
-              },
-              child:
-                  testButton(titleName: "Kim", iconName: Icons.perm_identity),
+            testButton(
+                titleName: "Add Something",
+                iconName: Icons.perm_identity,
+                run: () {
+                  testAdd(context);
+                }),
+            const SizedBox(
+              height: 25,
             ),
+            testButton(
+                titleName: "Increase he/she",
+                iconName: Icons.text_increase,
+                run: () {
+                  // context.read<QuestionChinaProvider>().initialD;
+                  context.read<Counter>().increase();
+                }),
+            const SizedBox(
+              height: 25,
+            ),
+            testButton(
+                titleName: "Initial D",
+                iconName: Icons.car_crash,
+                run: () {
+                  context.read<QuestionChinaProvider>().InitialD();
+                }),
+            const SizedBox(
+              height: 25,
+            ),
+            testButton(
+                titleName: "Get China",
+                iconName: Icons.get_app,
+                run: () {
+                  // context.read<QuestionChinaProvider>().initialD;
+                  print(context.read<QuestionChinaProvider>().getChina);
+                }),
           ]),
         ),
       ),
     );
   }
 
-  testButton({required String titleName, required IconData iconName}) {
-    return Row(
-      children: [
-        Icon(
-          iconName,
-          size: 40,
-          color: Colors.white,
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        Flexible(
-          child: Text('${titleName}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-              )),
-        )
-      ],
+  testButton(
+      {required String titleName,
+      required IconData iconName,
+      Function()? run}) {
+    return InkWell(
+      onTap: () {
+        if (run != null) {
+          run();
+        } else {
+          print("No  run");
+        }
+      },
+      child: Row(
+        children: [
+          Icon(
+            iconName,
+            size: 40,
+            color: Colors.white,
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Flexible(
+            child: Text('${titleName}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                )),
+          )
+        ],
+      ),
     );
   }
 }

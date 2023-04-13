@@ -7,16 +7,22 @@ class NormalButton extends StatelessWidget {
   final double widthButton;
   final String routeScreen;
   final double heightButton;
-
+  final Function()? run;
   // const NormalButton({super.key});
   const NormalButton(
       this.textDisplay, this.widthButton, this.heightButton, this.routeScreen,
-      {super.key});
+      {super.key, this.run});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        if (run != null) {
+          run!();
+        } else {
+          print("No  run");
+        }
+
         Navigator.pushNamed(context, routeScreen);
       },
       child: Container(

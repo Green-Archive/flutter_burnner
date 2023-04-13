@@ -53,7 +53,7 @@ class SelectDifficulty extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 height: 175,
                 alignment: AlignmentDirectional.center,
-                child: Text('ภาพประกอบ',
+                child: Text('Illustration',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,

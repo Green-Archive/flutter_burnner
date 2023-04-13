@@ -12,6 +12,15 @@ class EasyPlay extends StatefulWidget {
 
 class _EasyPlayState extends State<EasyPlay> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      context.read<Counter>().setCount(0);
+      // Provider.of<Counter>(context).setCount(50);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -46,11 +55,7 @@ class _EasyPlayState extends State<EasyPlay> {
                         SizedBox(
                           width: 15,
                         ),
-                        Text('${context.watch<Counter>().count}',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800,
-                            ))
+                        Count(),
                       ],
                     ),
                   ),
@@ -89,7 +94,7 @@ class _EasyPlayState extends State<EasyPlay> {
             const SizedBox(height: 15),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/select-difficulty');
+                // context.read<Counter>().setCount(5);
               },
               child: ThemeApp.NomalButtonShape(
                   context: context,
@@ -143,6 +148,10 @@ class Count extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${context.watch<Counter>().count}');
+    return Text('${context.watch<Counter>().count}',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w800,
+        ));
   }
 }

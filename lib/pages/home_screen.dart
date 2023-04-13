@@ -110,7 +110,10 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       NormalButton(
-                          'Competition', 1.5, 130, '/select-difficulty')
+                          'Competition', 1.5, 130, '/select-difficulty',
+                          run: () {
+                        print("kim");
+                      })
                     ],
                   ),
                   const SizedBox(height: 40),

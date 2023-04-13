@@ -130,14 +130,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future signUp(BuildContext context) async {
     try {
-      String username = usernameController.text.trim();
+      String fullName = usernameController.text.trim();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       String confirmPassword = confirmController.text.trim();
 
-      if (username == '') {
-        showSnackBar(context, "Password and Confirm-password is not match.");
-        throw ('User is null');
+      if (fullName == '') {
+        showSnackBar(context, "Please, Enter your full name!");
+        throw ('Full name is null');
       }
 
       if (password != confirmPassword) {
@@ -145,29 +145,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
         throw ("Password and Confirm-password is not match.");
       }
 
-      // we get the registered usernames from our database
-      final usernames = await _db.collection('users').doc("username").get();
-      final data = usernames.data() as Map<String, dynamic>;
-
-      // we return that if a key with that username exists
-      // return data.containsKey(username);
-
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((authResult) {
+          .then((authResult) async {
         User? user = authResult.user;
 
         if (user == null) {
           throw ('User is null');
         }
 
-        //user.uid
-        //user.email
-        //await user?.updateDisplayName("Jane Q. User");
+        await user.updateDisplayName(fullName);
         //await user?.updatePhotoURL("https://example.com/jane-q-user/profile.jpg");
+        await user.reload();
 
-        _db.collection("users").doc(user.uid).set({
-          "username": username, // Full Name I will edit later
+        await _db.collection("users").doc(user.uid).set({
+          "fullName": fullName, // Full Name I will edit later
           "uid": user.uid,
           "email": user.email
         }).then((value) {
