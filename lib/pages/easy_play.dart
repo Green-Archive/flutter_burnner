@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/components/showSnackbar.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
+import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../models/china_characters.dart';
 import '../providers/heart.dart';
 
 class EasyPlay extends StatefulWidget {
@@ -13,16 +16,63 @@ class EasyPlay extends StatefulWidget {
 }
 
 class _EasyPlayState extends State<EasyPlay> {
+  late List<ChinaCharacters> chiQues;
+
+  late ChinaCharacters wrongOne;
+
+  int numQues = 0;
+
   @override
   void initState() {
+    chiQues = context.read<QuestionChinaProvider>().getRandom10;
+    context.read<Heart>().startHeart(3);
+    wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+
+    while (wrongOne.character == chiQues[numQues].character) {
+      wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+    }
+
     super.initState();
-    Future.delayed(Duration.zero, () {
-      context.read<Heart>().startHeart(3);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> questions = [
+      ThemeApp.NomalButtonShape(
+          context: context,
+          widthButton: 1.2,
+          heightButton: 110,
+          textDisplay: '${chiQues[numQues].eng_meaning}',
+          run: () {
+            setState(() {
+              do {
+                wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+              } while (wrongOne.character == chiQues[numQues].character);
+
+              if (numQues < chiQues.length - 1) numQues++;
+
+              showSnackBar(context, "Good");
+
+            });
+          }),
+      ThemeApp.NomalButtonShape(
+          context: context,
+          widthButton: 1.2,
+          heightButton: 110,
+          textDisplay: '${wrongOne.eng_meaning}',
+          run: () {
+            setState(() {
+              do {
+                wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+              } while (wrongOne.character == chiQues[numQues].character);
+              if (numQues < chiQues.length - 1) numQues++;
+              showSnackBar(context, "Wrong");
+              context.read<Heart>().decrease();
+            });
+          }),
+    ];
+    questions.shuffle();
+
     return Scaffold(
       body: Container(
         decoration: ThemeApp.background(),
@@ -39,7 +89,7 @@ class _EasyPlayState extends State<EasyPlay> {
                   Expanded(child: BackToTheFuture()),
                   Container(
                       child: Center(
-                          child: Text('1/3',
+                          child: Text("${numQues + 1}/${chiQues.length}",
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w800,
@@ -66,7 +116,7 @@ class _EasyPlayState extends State<EasyPlay> {
             Container(
               alignment: Alignment.center,
               child: Text(
-                '天',
+                '${chiQues[numQues].character}',
                 style: TextStyle(
                     fontSize: 150,
                     fontWeight: FontWeight.bold,
@@ -80,23 +130,9 @@ class _EasyPlayState extends State<EasyPlay> {
                   fontWeight: FontWeight.w400,
                 )),
             const SizedBox(height: 30),
-            InkWell(
-              onTap: () {},
-              child: ThemeApp.NomalButtonShape(
-                  context: context,
-                  widthButton: 1.2,
-                  heightButton: 110,
-                  textDisplay: 'choice1'),
-            ),
+            questions[0],
             const SizedBox(height: 15),
-            InkWell(
-              onTap: () {},
-              child: ThemeApp.NomalButtonShape(
-                  context: context,
-                  widthButton: 1.2,
-                  heightButton: 110,
-                  textDisplay: 'choice2'),
-            )
+            questions[1],
           ],
         ),
       ),
@@ -150,3 +186,15 @@ class HeartRemain extends StatelessWidget {
         ));
   }
 }
+
+// class numQuesEnd extends StatelessWidget {
+//   const numQuesEnd({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text('${chiQues.length}',
+//         style: TextStyle(
+//           fontSize: 25,
+//           fontWeight: FontWeight.w800,
+//         ));
+//   }

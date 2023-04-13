@@ -5,7 +5,7 @@ import 'package:flutter_burnner/pages/select_difficulty.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
 import 'package:flutter_burnner/pages/test_kim.dart';
-import 'package:flutter_burnner/providers/china_char.dart';
+import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter_burnner/providers/heart.dart';
 import 'pages/login_screen.dart';

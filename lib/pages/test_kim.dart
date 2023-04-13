@@ -5,7 +5,7 @@ import '../components/theme_app.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 
-import '../providers/china_char.dart';
+import '../providers/china_quest.dart';
 
 class TestKim extends StatelessWidget {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -76,18 +76,12 @@ class TestKim extends StatelessWidget {
                   );
                   showSnackBar(context, "test");
                 }),
-            const SizedBox(
-              height: 25,
-            ),
             testButton(
                 titleName: "Add Something",
                 iconName: Icons.perm_identity,
                 run: () {
                   testAdd(context);
                 }),
-            const SizedBox(
-              height: 25,
-            ),
             testButton(
                 titleName: "Increase he/she",
                 iconName: Icons.text_increase,
@@ -95,24 +89,25 @@ class TestKim extends StatelessWidget {
                   // context.read<QuestionChinaProvider>().initialD;
                   context.read<CounterStrike>().increase();
                 }),
-            const SizedBox(
-              height: 25,
-            ),
             testButton(
                 titleName: "Initial D",
                 iconName: Icons.car_crash,
                 run: () {
                   context.read<QuestionChinaProvider>().initialD();
                 }),
-            const SizedBox(
-              height: 25,
-            ),
             testButton(
                 titleName: "Get China",
                 iconName: Icons.get_app,
                 run: () {
                   // context.read<QuestionChinaProvider>().initialD;
                   print(context.read<QuestionChinaProvider>().getChina);
+                }),
+            testButton(
+                titleName: "Get China",
+                iconName: Icons.get_app,
+                run: () {
+                  // context.read<QuestionChinaProvider>().initialD;
+                  print(context.read<QuestionChinaProvider>().getRandom10.length);
                 }),
           ]),
         ),
@@ -124,34 +119,41 @@ class TestKim extends StatelessWidget {
       {required String titleName,
       required IconData iconName,
       Function()? run}) {
-    return InkWell(
-      onTap: () {
-        if (run != null) {
-          run();
-        } else {
-          print("No  run");
-        }
-      },
-      child: Row(
-        children: [
-          Icon(
-            iconName,
-            size: 40,
-            color: Colors.white,
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            if (run != null) {
+              run();
+            } else {
+              print("No  run");
+            }
+          },
+          child: Row(
+            children: [
+              Icon(
+                iconName,
+                size: 40,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Flexible(
+                child: Text('${titleName}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    )),
+              )
+            ],
           ),
-          SizedBox(
-            width: 20,
-          ),
-          Flexible(
-            child: Text('${titleName}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                )),
-          )
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 25,
+        )
+      ],
     );
   }
 }

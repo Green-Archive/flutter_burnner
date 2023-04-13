@@ -8,8 +8,7 @@ class Heart with ChangeNotifier {
   void startHeart(int heart){
     _heart = heart;
     print("startHeart = ${heart}");
-    notifyListeners();
-
+    // notifyListeners();
   }
 
   void decrease() {

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/theme_app.dart';
 import '../components/normal_button.dart';
 import '../components/user_profile.dart';
-import '../providers/china_char.dart';
+import '../providers/china_quest.dart';
 
 class HomeScreen extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
