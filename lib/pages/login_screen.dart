@@ -57,14 +57,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context: context,
                                 textDisplay: "Log in",
                                 widthButton: 3.5,
-                                routeScreen: '/home'),
+                                routeScreen: '/'),
 
                             const SizedBox(width: 10),
                             Expanded(
                               child: guestButton(
                                   context: context,
                                   textDisplay: "Continue as guest",
-                                  routeScreen: '/home'),
+                                  routeScreen: '/'),
                             ),
                           ],
                         ),
@@ -128,11 +128,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future signInAnon() async {
     await _auth.signInAnonymously().then((user) {
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-      // Navigator.pushReplacementNamed(context, "/home");
 
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
       print("signed in ");
     }).catchError((error) {
       print(error);
@@ -180,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       showSnackBar(context, "signed in ");
 
-      // Navigator.pushReplacementNamed(context, "/home");
+      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
       print("signed in ");
     } on FirebaseAuthException catch (e) {
@@ -200,10 +198,10 @@ class _LoginScreenState extends State<LoginScreen> {
             email: emailController.text.trim(),
             password: passwordController.text.trim())
         .then((user) {
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-      // Navigator.pushReplacementNamed(context, "/home");
+
+      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+
 
       print("signed in ");
     }).catchError((error) {

@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +9,9 @@ import 'package:flutter/cupertino.dart';
 import '../models/china_characters.dart';
 
 class QuestionChinaProvider with ChangeNotifier {
+
+  bool check_input_yet = true;
+
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final _random = new Random();
 
@@ -41,20 +45,20 @@ class QuestionChinaProvider with ChangeNotifier {
     randomList.shuffle();
     List<ChinaCharacters> newList  = randomList.take(10).toList();
     random10 = newList;
-    print("kimerza");
     // notifyListeners();
     return newList;
   }
 
 
   void initialD() {
+
     _db
         .collection("chinese_words")
         .withConverter(
           fromFirestore: ChinaCharacters.fromFirestore,
           toFirestore: (ChinaCharacters chinaCharacters, _) =>
               chinaCharacters.toFirestore(),
-        )
+        ).limit(5)
         .get()
         .then((QuerySnapshot<ChinaCharacters> querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
@@ -70,7 +74,9 @@ class QuestionChinaProvider with ChangeNotifier {
     }).catchError((err) {
       print("allChineseWords Error : ${err}");
     });
+
   }
+
 
 
 }
