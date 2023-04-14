@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_burnner/pages/home_screen.dart';
 
 class TimerCount with ChangeNotifier {
 
@@ -23,10 +25,15 @@ class TimerCount with ChangeNotifier {
         if (_start == 0) {
             timer.cancel();
             resetTime();
-            Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-              "mode": "Medium",
-              "score": numQues,
-            });
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+            //   ModalRoute.withName('/'),
+            // );
+            // Navigator.pushReplacementNamed(context, "/congrats", arguments: {
+            //   "mode": "Medium",
+            //   "score": numQues,
+            // });
 
             notifyListeners();
 

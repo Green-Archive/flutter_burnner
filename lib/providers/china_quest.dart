@@ -8,11 +8,13 @@ import 'package:flutter/cupertino.dart';
 import '../models/china_characters.dart';
 
 class QuestionChinaProvider with ChangeNotifier {
+  bool check_input_yet = true;
+
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final _random = new Random();
 
   List<ChinaCharacters> allChineseWords = [];
-  List<ChinaCharacters> random10 = [] ;
+  List<ChinaCharacters> random10 = [];
   int index = 0;
 
   // final _random = new Random();
@@ -31,46 +33,47 @@ class QuestionChinaProvider with ChangeNotifier {
   //   random10 = newList;
   //   notifyListeners();
   // }
-  ChinaCharacters get getRandom1 => allChineseWords[_random.nextInt(allChineseWords.length)];
+  ChinaCharacters get getRandom1 =>
+      allChineseWords[_random.nextInt(allChineseWords.length)];
 
-
-
-  List<ChinaCharacters> get getRandom10
-  {
+  List<ChinaCharacters> get getRandom10 {
     List<ChinaCharacters> randomList = List.from(allChineseWords);
     randomList.shuffle();
-    List<ChinaCharacters> newList  = randomList.take(10).toList();
+    List<ChinaCharacters> newList = randomList.take(10).toList();
     random10 = newList;
-    print("kimerza");
     // notifyListeners();
     return newList;
   }
 
-
   void initialD() {
-    _db
-        .collection("chinese_words")
-        .withConverter(
-          fromFirestore: ChinaCharacters.fromFirestore,
-          toFirestore: (ChinaCharacters chinaCharacters, _) =>
-              chinaCharacters.toFirestore(),
-        )
-        .get()
-        .then((QuerySnapshot<ChinaCharacters> querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        for (var docSnapshot in querySnapshot.docs) {
-          allChineseWords.add(docSnapshot.data());
+    if (check_input_yet == true) {
+      _db
+          .collection("chinese_words")
+          .withConverter(
+            fromFirestore: ChinaCharacters.fromFirestore,
+            toFirestore: (ChinaCharacters chinaCharacters, _) =>
+                chinaCharacters.toFirestore(),
+          )
+          .limit(5)
+          .get()
+          .then((QuerySnapshot<ChinaCharacters> querySnapshot) {
+        if (querySnapshot.docs.isNotEmpty) {
+          for (var docSnapshot in querySnapshot.docs) {
+            allChineseWords.add(docSnapshot.data());
+          }
+          print("Succ Provider China.");
+          print(allChineseWords.length);
+          check_input_yet = false;
+          notifyListeners();
+        } else {
+          print("No such document.");
+          notifyListeners();
         }
-        print("Succ Provider China.");
-        notifyListeners();
-      } else {
-        print("No such document.");
-        notifyListeners();
-      }
-    }).catchError((err) {
-      print("allChineseWords Error : ${err}");
-    });
+      }).catchError((err) {
+        print("allChineseWords Error : ${err}");
+      });
+    } else {
+      print("input again?");
+    }
   }
-
-
 }
