@@ -70,9 +70,11 @@ class _EasyPlayState extends State<EasyPlay> {
         textDisplay: '${wrongOne.eng_meaning}',
         run: () {
           setState(() {
+
             do {
               wrongOne = context.read<QuestionChinaProvider>().getRandom1;
             } while (wrongOne.character == chiQues[numQues].character);
+
             if (numQues < chiQues.length - 1) numQues++;
             showSnackBar(context, "Wrong");
             context.read<Heart>().decrease();

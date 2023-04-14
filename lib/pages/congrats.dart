@@ -51,8 +51,9 @@ class Congrats extends StatelessWidget {
               onTap: () {
                 // Navigator.popUntil(context, ModalRoute.withName('/home'));
                 // Navigator.pushNamedAndRemoveUntil(context, '/congrats', ModalRoute.withName('/home'));
-                Navigator.pushReplacementNamed(context, "/");
-
+                // Navigator.pushReplacementNamed(context, "/");
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (Route<dynamic> route) => false);
                 // Navigator.pop(context);
               },
               child: Text("Home",
