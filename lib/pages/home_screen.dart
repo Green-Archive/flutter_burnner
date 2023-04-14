@@ -116,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      NormalButton('Practice \n Mode', 3, 130, '/easy-play'),
+                      NormalButton('Practice \n Mode', 3, 130, '/congrats'),
                       NormalButton('Test \n Content', 3, 130, '/test-kim')
                     ],
                   ),

@@ -6,14 +6,12 @@ class ChinaCharacters {
   final String? pinyin;
   final String? POS;
 
-  String toString()
-  {
-    return "Character = ${character} "
-        "Meaning = ${eng_meaning} "
-        "Pinyin = ${pinyin} "
-        "Part of speech = ${POS} ";
+  String toString() {
+    return "Character = ${character} \n"
+        "Meaning = ${eng_meaning} \n"
+        "Pinyin = ${pinyin} \n"
+        "Part of speech = ${POS} \n";
   }
-
 
   ChinaCharacters({
     this.character,

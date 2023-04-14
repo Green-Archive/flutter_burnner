@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/pages/congrats.dart';
 import 'package:flutter_burnner/pages/easy_play.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
@@ -44,6 +45,7 @@ Future main() async {
           '/home': (ctx) => HomeScreen(),
           '/settings': (ctx) => SettingScreen(),
           '/test-kim': (ctx) => TestKim(),
+          '/congrats': (ctx) => Congrats(),
         },
       ),
     ),

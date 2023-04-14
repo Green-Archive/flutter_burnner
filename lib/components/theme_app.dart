@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/components/normal_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThemeApp {
@@ -72,7 +73,6 @@ class ThemeApp {
         }
       },
       child: Container(
-
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(45.0),
