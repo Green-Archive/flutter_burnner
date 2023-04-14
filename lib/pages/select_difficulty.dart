@@ -100,7 +100,7 @@ class SelectDifficulty extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              NormalButton('Medium', 1.5, 100, '/easy-play'),
+              NormalButton('Medium', 1.5, 100, '/medium-play'),
             ],
           ),
           const SizedBox(height: 10),

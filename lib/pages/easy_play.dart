@@ -105,7 +105,7 @@ class _EasyPlayState extends State<EasyPlay> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(child: BackToTheFuture()),
+                  Expanded(child: BackToTheFuture()),
                   // Container(
                   //     child: Center(
                   //         child: Text("${numQues + 1}/${chiQues.length}",

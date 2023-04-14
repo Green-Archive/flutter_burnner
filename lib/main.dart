@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
 import 'package:flutter_burnner/pages/easy_play.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
+import 'package:flutter_burnner/pages/medium_play.dart';
 import 'package:flutter_burnner/pages/select_difficulty.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_burnner/pages/test_kim.dart';
 import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter_burnner/providers/heart.dart';
+import 'package:flutter_burnner/providers/timer.dart';
 import 'pages/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +28,8 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => CounterStrike()),
         ChangeNotifierProvider(create: (_) => QuestionChinaProvider()),
         ChangeNotifierProvider(create: (_) => Heart()),
+        ChangeNotifierProvider(create: (_) => TimerCount())
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,6 +42,7 @@ Future main() async {
         //     child: MainPage()),
         routes: {
           '/easy-play': (ctx) => EasyPlay(),
+          '/medium-play': (ctx) => MediumPlay(),
           '/select-difficulty': (ctx) => SelectDifficulty(),
           '/login': (ctx) => LoginScreen(),
           '/sign-up': (ctx) => SignUpScreen(),

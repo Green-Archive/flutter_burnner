@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/components/showSnackbar.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
-import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:flutter_burnner/providers/china_quest.dart';
-import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../models/china_characters.dart';
 import '../providers/heart.dart';
+import '../providers/timer.dart';
 
 class MediumPlay extends StatefulWidget {
   MediumPlay({super.key});
@@ -33,17 +31,27 @@ class _MediumPlayState extends State<MediumPlay> {
       wrongOne = context.read<QuestionChinaProvider>().getRandom1;
     }
 
+    context.read<TimerCount>().startTimer(context :context, numQues:numQues, mode: "Medium");
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    // WidgetsBinding.instance
+    //     .addPostFrameCallback((_) {
+    //
+    // });
+
+
     Widget correctChoice = ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
         textDisplay: '${chiQues[numQues].eng_meaning}',
         run: () {
+            context.read<TimerCount>().resetTime();
           setState(() {
             do {
               wrongOne = context.read<QuestionChinaProvider>().getRandom1;
@@ -54,7 +62,7 @@ class _MediumPlayState extends State<MediumPlay> {
             } else {
               // Navigator.pushNamedAndRemoveUntil(context, '/congrats', (Route<dynamic> route) => false);
               Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-                "mode": "EZ",
+                "mode": "Medium",
                 "score": numQues,
               });
             }
@@ -69,6 +77,7 @@ class _MediumPlayState extends State<MediumPlay> {
         heightButton: 110,
         textDisplay: '${wrongOne.eng_meaning}',
         run: () {
+          context.read<TimerCount>().resetTime();
           setState(() {
             do {
               wrongOne = context.read<QuestionChinaProvider>().getRandom1;
@@ -79,7 +88,7 @@ class _MediumPlayState extends State<MediumPlay> {
 
             if (context.read<Heart>().getHeart == 0) {
               Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-                "mode": "EZ",
+                "mode": "Medium",
                 "score": numQues,
               });
             }
@@ -91,6 +100,8 @@ class _MediumPlayState extends State<MediumPlay> {
       wrongChoice_1,
     ];
     questions.shuffle();
+
+
 
     return Scaffold(
       body: Container(
@@ -105,14 +116,11 @@ class _MediumPlayState extends State<MediumPlay> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(child: BackToTheFuture()),
-                  // Container(
-                  //     child: Center(
-                  //         child: Text("${numQues + 1}/${chiQues.length}",
-                  //             style: TextStyle(
-                  //               fontSize: 30,
-                  //               fontWeight: FontWeight.w800,
-                  //             )))),
+                  Expanded(child: BackToTheFuture()),
+                  Container(
+                      child: Center(
+                    child: TimeMy(numQues: numQues,),
+                  )),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -199,6 +207,31 @@ class HeartRemain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('${context.watch<Heart>().getHeart}',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w800,
+        ));
+  }
+}
+
+class TimeMy extends StatelessWidget {
+
+  final int numQues;
+
+  const TimeMy({super.key, required this.numQues});
+
+  @override
+  Widget build(BuildContext context) {
+
+    // if(context.watch<TimerCount>().getTime == 0)
+    // {
+    //   Navigator.pushReplacementNamed(context, "/congrats", arguments: {
+    //     "mode": "Medium",
+    //     "score": numQues,
+    //   });
+    // }
+
+    return Text('${context.watch<TimerCount>().getTime}',
         style: TextStyle(
           fontSize: 25,
           fontWeight: FontWeight.w800,
