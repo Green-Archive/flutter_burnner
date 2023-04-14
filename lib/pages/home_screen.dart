@@ -32,9 +32,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<QuestionChinaProvider>().initialD();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<QuestionChinaProvider>().initialD();
+    // });
 
     return Scaffold(
       body: Container(

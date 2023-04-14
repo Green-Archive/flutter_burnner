@@ -26,7 +26,6 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => CounterStrike()),
         ChangeNotifierProvider(create: (_) => QuestionChinaProvider()),
         ChangeNotifierProvider(create: (_) => Heart()),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,16 +53,23 @@ Future main() async {
 
 class MainPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return HomeScreen();
-            } else {
-              return LoginScreen();
-            }
-          },
-        ),
-      );
+  Widget build(BuildContext context) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<QuestionChinaProvider>().initialD();
+    });
+
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return HomeScreen();
+          } else {
+            return LoginScreen();
+          }
+        },
+      ),
+    );
+  }
 }

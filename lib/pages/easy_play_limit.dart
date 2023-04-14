@@ -9,14 +9,14 @@ import 'package:provider/provider.dart';
 import '../models/china_characters.dart';
 import '../providers/heart.dart';
 
-class EasyPlay extends StatefulWidget {
-  EasyPlay({super.key});
+class EasyPlayLimit extends StatefulWidget {
+  EasyPlayLimit({super.key});
 
   @override
-  _EasyPlayState createState() => _EasyPlayState();
+  _EasyPlayLimitState createState() => _EasyPlayLimitState();
 }
 
-class _EasyPlayState extends State<EasyPlay> {
+class _EasyPlayLimitState extends State<EasyPlayLimit> {
   late List<ChinaCharacters> chiQues;
 
   late ChinaCharacters wrongOne;
@@ -38,7 +38,9 @@ class _EasyPlayState extends State<EasyPlay> {
 
   @override
   Widget build(BuildContext context) {
-    Widget correctChoice = ThemeApp.NomalButtonShape(
+
+    Widget correctChoice =
+    ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
@@ -51,19 +53,21 @@ class _EasyPlayState extends State<EasyPlay> {
 
             if (numQues < chiQues.length - 1) {
               numQues++;
-            } else {
-              // Navigator.pushNamedAndRemoveUntil(context, '/congrats', (Route<dynamic> route) => false);
-              Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-                "mode": "EZ",
-                "score": numQues,
-              });
             }
+            else
+              {
+                // Navigator.pushNamedAndRemoveUntil(context, '/congrats', (Route<dynamic> route) => false);
+
+                Navigator.pushReplacementNamed(context, "/congrats",arguments: "EZ");
+              }
 
             showSnackBar(context, "Good");
+
           });
         });
 
-    Widget wrongChoice_1 = ThemeApp.NomalButtonShape(
+    Widget wrongChoice_1 =
+    ThemeApp.NomalButtonShape(
         context: context,
         widthButton: 1.2,
         heightButton: 110,
@@ -76,19 +80,14 @@ class _EasyPlayState extends State<EasyPlay> {
             if (numQues < chiQues.length - 1) numQues++;
             showSnackBar(context, "Wrong");
             context.read<Heart>().decrease();
-
-            if (context.read<Heart>().getHeart == 0) {
-              Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-                "mode": "EZ",
-                "score": numQues,
-              });
-            }
           });
         });
+
 
     List<Widget> questions = [
       correctChoice,
       wrongChoice_1,
+
     ];
     questions.shuffle();
 
@@ -105,14 +104,14 @@ class _EasyPlayState extends State<EasyPlay> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(child: BackToTheFuture()),
-                  // Container(
-                  //     child: Center(
-                  //         child: Text("${numQues + 1}/${chiQues.length}",
-                  //             style: TextStyle(
-                  //               fontSize: 30,
-                  //               fontWeight: FontWeight.w800,
-                  //             )))),
+                  Expanded(child: BackToTheFuture()),
+                  Container(
+                      child: Center(
+                          child: Text("${numQues + 1}/${chiQues.length}",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                              )))),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,

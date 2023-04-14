@@ -9,14 +9,14 @@ import 'package:provider/provider.dart';
 import '../models/china_characters.dart';
 import '../providers/heart.dart';
 
-class EasyPlay extends StatefulWidget {
-  EasyPlay({super.key});
+class MediumPlay extends StatefulWidget {
+  MediumPlay({super.key});
 
   @override
-  _EasyPlayState createState() => _EasyPlayState();
+  _MediumPlayState createState() => _MediumPlayState();
 }
 
-class _EasyPlayState extends State<EasyPlay> {
+class _MediumPlayState extends State<MediumPlay> {
   late List<ChinaCharacters> chiQues;
 
   late ChinaCharacters wrongOne;
