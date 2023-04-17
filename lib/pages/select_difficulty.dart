@@ -1,3 +1,4 @@
+import 'package:flutter_burnner/components/normalLayout.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,35 +19,22 @@ class SelectDifficulty extends StatelessWidget {
     //
     // });
 
-    return Scaffold(
-      body: Container(
-        decoration: ThemeApp.background(),
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          SizedBox(height: 60),
-          Padding(
-            padding: EdgeInsets.only(left: 30.0, right: 30.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(child: BackToTheFuture()),
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.5,
-                  alignment: AlignmentDirectional.center,
-                  child: Text("Competition",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                      )),
-                ),
-                Expanded(child: Container())
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
+    return NormalLayout(
+      head: [
+        const Expanded(child: BackToTheFuture()),
+        Container(
+          width: MediaQuery.of(context).size.width / 1.5,
+          alignment: AlignmentDirectional.center,
+          child: Text("Competition",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+              )),
+        ),
+        Expanded(child: Container())
+      ],
+      body:  [
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +44,7 @@ class SelectDifficulty extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(90.0),
                   border: Border.all(
-                    color: Color.fromARGB(255, 151, 71, 255),
+                    color: ThemeApp.violetTheme,
                     width: 4.0,
                   ),
                 ),
@@ -111,8 +99,8 @@ class SelectDifficulty extends StatelessWidget {
               NormalButton('Hard', 1.5, 100, '/easy-play'),
             ],
           ),
-        ]),
-      ),
+        ],
+
     );
   }
 }

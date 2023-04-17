@@ -129,8 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Future signInAnon() async {
     await _auth.signInAnonymously().then((user) {
 
+      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
-      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
       print("signed in ");
     }).catchError((error) {
       print(error);
@@ -138,6 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signInWithGoogle(BuildContext context) async {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => Center(child: CircularProgressIndicator()));
+
     try {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
@@ -149,10 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => Center(child: CircularProgressIndicator()));
 
         final GoogleSignInAuthentication? googleAuth =
             await googleUser?.authentication;
@@ -178,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       showSnackBar(context, "signed in ");
 
-      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
       print("signed in ");
     } on FirebaseAuthException catch (e) {
@@ -200,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
         .then((user) {
 
 
-      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
 
       print("signed in ");

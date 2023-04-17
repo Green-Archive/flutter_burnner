@@ -15,7 +15,9 @@ class HomeScreen extends StatelessWidget {
       return "Guest";
     }
 
-    if (user.displayName != "null") {
+    if ((user.displayName) != "null" || user.displayName != null  ) {
+      print("User : ${user.displayName}");
+      // context.read<FirebaseAuth>().
       return user.displayName;
     }
 
@@ -35,6 +37,8 @@ class HomeScreen extends StatelessWidget {
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   context.read<QuestionChinaProvider>().initialD();
     // });
+
+    String userName = disPlayName();
 
     return Scaffold(
       body: Container(
@@ -70,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Text(
-                            '${disPlayName()}',
+                            '${userName}',
                             style: TextStyle(
                               fontFamily: 'Inter-Light',
                               fontSize: 24,
@@ -127,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      NormalButton('Topic', 3.5, 80, '/easy-play'),
+                      NormalButton('Topic', 3.5, 80, '/test-blank-page'),
                       NormalButton('Score', 3.5, 80, '/easy-play'),
                       NormalButton('Settings', 3.5, 80, '/settings')
                     ],

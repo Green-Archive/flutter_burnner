@@ -18,23 +18,26 @@ class TimerCount with ChangeNotifier {
   }
 
   void startTimer({required BuildContext context, required String mode, required int numQues}) {
-    const oneSec =  const Duration(seconds: 1);
+    const oneSec =  Duration(seconds: 1);
     _timer =   Timer.periodic(
       oneSec,
           (Timer timer) {
         if (_start == 0) {
             timer.cancel();
-            resetTime();
+
+            Navigator.pushReplacementNamed(context, "/congrats", arguments: {
+              "mode": "Medium",
+              "score": numQues,
+            });
+
+
             // Navigator.pushAndRemoveUntil(
             //   context,
             //   MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
             //   ModalRoute.withName('/'),
             // );
-            // Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-            //   "mode": "Medium",
-            //   "score": numQues,
-            // });
 
+            // resetTime();
             notifyListeners();
 
         } else {

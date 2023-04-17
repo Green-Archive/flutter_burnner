@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_burnner/components/normalLayout.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
 import 'package:flutter_burnner/pages/easy_play.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_burnner/pages/select_difficulty.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
 import 'package:flutter_burnner/pages/test_kim.dart';
+import 'package:flutter_burnner/pages/testkim.dart';
 import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter_burnner/providers/heart.dart';
@@ -35,11 +37,6 @@ Future main() async {
         debugShowCheckedModeBanner: false,
         title: "Login Screen ",
         home: MainPage(),
-        // MultiProvider(
-        //     providers: [
-        //       ChangeNotifierProvider(create: (_) => Counter()),
-        //     ],
-        //     child: MainPage()),
         initialRoute: '/',
         routes: {
           '/easy-play': (ctx) => EasyPlay(),
@@ -51,6 +48,7 @@ Future main() async {
           '/settings': (ctx) => SettingScreen(),
           '/test-kim': (ctx) => TestKim(),
           '/congrats': (ctx) => Congrats(),
+          '/test-blank-page': (ctx) => testBlankPage(),
         },
       ),
     ),
