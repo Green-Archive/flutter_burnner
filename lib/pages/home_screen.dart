@@ -137,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                         )),
                         IconButton(
                             padding: EdgeInsets.zero,
-                            onPressed: () => Navigator.pushNamed(context, '/settings') , icon: const Icon(
+                            onPressed: () => Navigator.pushNamed(context, '/score-board') , icon: const Icon(
                           Icons.bar_chart_outlined,
                           size: 50,
                           color: Colors.white,

@@ -161,7 +161,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await _db.collection("users").doc(user.uid).set({
           "fullName": fullName, // Full Name I will edit later
           "uid": user.uid,
-          "email": user.email
+          "email": user.email,
+          "score": 0,
+          "photoURL": ""
         }).then((value) {
           print("Sign up user successful.");
           showSnackBar(context, "Sign up user successful.");

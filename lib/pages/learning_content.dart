@@ -108,6 +108,7 @@ class _LearningModeState extends State<LearningMode> {
             )),
         const SizedBox(height: 30),
         Container(
+          height: 80,
           padding: EdgeInsets.only(left: 15.0, right: 15.0),
           alignment: Alignment.center,
           child:

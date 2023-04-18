@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/layouts/default.dart';
 import 'package:flutter_burnner/components/showSnackbar.dart';
@@ -28,14 +30,22 @@ class _HardModeState extends State<HardMode> {
   late ChinaCharacters wrongOne_3;
 
   int numQues = 0;
-
+  int oldsSore = 0;
   int score = 0;
+
+  final user = FirebaseAuth.instance.currentUser!;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
+
+
+
 
   @override
   void initState() {
     chiQues = context.read<QuestionChinaProvider>().getRandom10;
-    context.read<Heart>().startHeart(3);
+    context.read<Heart>().startHeart(1);
     setQuestions();
+    getOldScore();
+
 
     // while (wrongOne_1.character == chiQues[numQues].character) {
     //   wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
@@ -64,7 +74,35 @@ class _HardModeState extends State<HardMode> {
 
   void thisIsTheEnd() {
     context.read<TimerCount>().cancelTime();
+
+    if(score > oldsSore) writeNewScore();
+
     navigateToCongrats();
+  }
+
+  void getOldScore(){
+    final docRef = db.collection("users").doc(user.uid);
+    docRef.get().then(
+          (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        oldsSore = data["score"];
+        print("oldsSore = ${oldsSore}");
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+  }
+
+  Future<void> writeNewScore() async {
+    await db.collection("users").doc(user.uid).update({
+      "score": score,
+    }).then((value) {
+      print("Update Score successful.");
+      showSnackBar(context, "New Score");
+    }).catchError((e) {
+      print("Error : ${e}");
+      showSnackBar(context,
+          "db error"); // Displaying the usual firebase error message
+    });
   }
 
   void navigateToCongrats() {
@@ -124,7 +162,6 @@ class _HardModeState extends State<HardMode> {
               fontWeight: FontWeight.w800,
             )));
   }
-
   @override
   Widget build(BuildContext context) {
     Widget correctChoice = ThemeApp.NomalButtonShape(

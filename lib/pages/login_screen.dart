@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future signInAnon() async {
     await _auth.signInAnonymously().then((user) {
 
-      // Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
       print("signed in ");
     }).catchError((error) {
@@ -142,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //     context: context,
         //     barrierDismissible: false,
         //     builder: (context) => Center(child: CircularProgressIndicator()));
+    final FirebaseFirestore db = FirebaseFirestore.instance;
 
     try {
       if (kIsWeb) {
@@ -150,7 +152,36 @@ class _LoginScreenState extends State<LoginScreen> {
         googleProvider
             .addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-        await _auth.signInWithPopup(googleProvider);
+
+        // await _auth.signInWithPopup(googleProvider);
+
+        UserCredential userCredential = await _auth.signInWithPopup(googleProvider);
+
+        if (userCredential.user != null) {
+          if (userCredential.additionalUserInfo!.isNewUser) {
+
+            final user = userCredential.user;
+
+            await db.collection("users").doc(user?.uid).set({
+              "fullName": user?.displayName, // Full Name I will edit later
+              "uid": user?.uid,
+              "email": user?.email,
+              "score": 0,
+              "photoURL": user?.photoURL,
+
+            }).then((value) {
+              print("Sign up user successful.");
+              showSnackBar(context, "Sign up user successful.");
+              Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+            }).catchError((e) {
+              print("Error : ${e}");
+              showSnackBar(context,
+                  "db error"); // Displaying the usual firebase error message
+            });
+
+          }
+        }
+
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -172,9 +203,30 @@ class _LoginScreenState extends State<LoginScreen> {
           // for google sign in and google sign up, only one as of now),
           // do the following:
 
-          // if (userCredential.user != null) {
-          //   if (userCredential.additionalUserInfo!.isNewUser) {}
-          // }
+          if (userCredential.user != null) {
+            if (userCredential.additionalUserInfo!.isNewUser) {
+
+              final user = userCredential.user;
+
+              await db.collection("users").doc(user?.uid).set({
+                "fullName": user?.displayName, // Full Name I will edit later
+                "uid": user?.uid,
+                "email": user?.email,
+                "score": 0,
+                "photoURL": user?.photoURL,
+
+              }).then((value) {
+                print("Sign up user successful.");
+                showSnackBar(context, "Sign up user successful.");
+                Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+              }).catchError((e) {
+                print("Error : ${e}");
+                showSnackBar(context,
+                    "db error"); // Displaying the usual firebase error message
+              });
+
+            }
+          }
         }
       }
       showSnackBar(context, "signed in ");
@@ -194,20 +246,24 @@ class _LoginScreenState extends State<LoginScreen> {
     //     barrierDismissible: false,
     //     builder: (context) => Center(child: CircularProgressIndicator()));
 
-    await _auth
-        .signInWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim())
-        .then((user) {
+    try{
+      await _auth
+          .signInWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim())
+          .then((user) {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
-
-      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-
-
-      print("signed in ");
-    }).catchError((error) {
-      print(error);
-    });
+        print("signed in ");
+      });
+    }  on FirebaseAuthException catch (e) {
+      showSnackBar(
+          context, e.message!); // Displaying the usual firebase error message
+    } catch (e) {
+      print("Error Something : ${e}");
+      showSnackBar(context, "${e}");
+    }
   }
 
   Widget loginButton(
