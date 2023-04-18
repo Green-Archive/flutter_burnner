@@ -68,11 +68,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         textController: emailController),
                     const SizedBox(height: 25),
                     LoginTextBox(
+                        setobscureText: true,
                         titleName: 'Password',
                         iconName: Icons.lock,
                         textController: passwordController),
                     const SizedBox(height: 25),
                     LoginTextBox(
+                        setobscureText: true,
                         titleName: 'Confirm Password',
                         iconName: Icons.lock,
                         textController: confirmController),

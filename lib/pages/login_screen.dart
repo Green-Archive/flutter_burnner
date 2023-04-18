@@ -46,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           textController: emailController),
                       const SizedBox(height: 25),
                       LoginTextBox(
+                          setobscureText: true,
                           titleName: 'Password',
                           iconName: Icons.lock,
                           textController: passwordController),

@@ -36,20 +36,12 @@ class _HardModeState extends State<HardMode> {
   final user = FirebaseAuth.instance.currentUser!;
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-
-
-
   @override
   void initState() {
     chiQues = context.read<QuestionChinaProvider>().getRandom10;
     context.read<Heart>().startHeart(1);
     setQuestions();
     getOldScore();
-
-
-    // while (wrongOne_1.character == chiQues[numQues].character) {
-    //   wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
-    // }
 
     context.read<TimerCount>().startTimer(
         context: context, score: score, mode: "Hard", setTimeSecond: 10);
@@ -75,21 +67,27 @@ class _HardModeState extends State<HardMode> {
   void thisIsTheEnd() {
     context.read<TimerCount>().cancelTime();
 
-    if(score > oldsSore) writeNewScore();
+    if (score > oldsSore) writeNewScore();
 
     navigateToCongrats();
   }
 
-  void getOldScore(){
-    final docRef = db.collection("users").doc(user.uid);
-    docRef.get().then(
-          (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        oldsSore = data["score"];
-        print("oldsSore = ${oldsSore}");
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
+  void getOldScore() {
+    if (user.isAnonymous == false) {
+      final docRef = db.collection("users").doc(user.uid);
+      docRef.get().then(
+        (DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          oldsSore = data["score"];
+          print("oldsSore = ${oldsSore}");
+        },
+        onError: (e) {
+          print("Error getting document: $e");
+        },
+      );
+    }
+
+    oldsSore = 999;
   }
 
   Future<void> writeNewScore() async {
@@ -100,8 +98,8 @@ class _HardModeState extends State<HardMode> {
       showSnackBar(context, "New Score");
     }).catchError((e) {
       print("Error : ${e}");
-      showSnackBar(context,
-          "db error"); // Displaying the usual firebase error message
+      showSnackBar(
+          context, "db error"); // Displaying the usual firebase error message
     });
   }
 
@@ -162,6 +160,7 @@ class _HardModeState extends State<HardMode> {
               fontWeight: FontWeight.w800,
             )));
   }
+
   @override
   Widget build(BuildContext context) {
     Widget correctChoice = ThemeApp.NomalButtonShape(

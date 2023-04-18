@@ -129,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         IconButton(
                             padding: EdgeInsets.zero,
-                            onPressed: () => Navigator.pushNamed(context, '/test-blank-page') , icon: const Icon(
+                            onPressed: () => Navigator.pushNamed(context, '/test-kim') , icon: const Icon(
 
                           Icons.home_outlined,
                           size: 50,

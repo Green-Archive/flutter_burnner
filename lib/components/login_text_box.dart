@@ -6,15 +6,24 @@ class LoginTextBox extends StatelessWidget {
   final String titleName;
   final IconData iconName;
   final TextEditingController textController;
+  final bool? setobscureText;
 
   const LoginTextBox(
       {super.key,
       required this.titleName,
       required this.iconName,
-      required this.textController});
+      required this.textController,  this.setobscureText});
 
   @override
   Widget build(BuildContext context) {
+
+    bool? setobscureTextInside = false;
+
+    if (setobscureText == true)
+      {
+        setobscureTextInside = true;
+      }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,6 +46,7 @@ class LoginTextBox extends StatelessWidget {
             ),
           ),
           child: TextField(
+            obscureText: setobscureTextInside,
             controller: textController,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(

@@ -48,13 +48,6 @@ class TestKim extends StatelessWidget {
                 ),
                 Expanded(
                     child: Container(
-
-                        // child: Text('${context.watch<QuestionChinaProvider>().getChina}',
-                        //     style: TextStyle(
-                        //       fontSize: 25,
-                        //       fontWeight: FontWeight.w800,
-                        //     )),
-
                         ))
               ],
             ),
@@ -81,33 +74,35 @@ class TestKim extends StatelessWidget {
                 iconName: Icons.perm_identity,
                 run: () {
                   testAdd(context);
+                  showSnackBar(context, "Add Something to database");
                 }),
             testButton(
-                titleName: "Increase he/she",
+                titleName: "Increase count maichi lao",
                 iconName: Icons.text_increase,
                 run: () {
-                  // context.read<QuestionChinaProvider>().initialD;
                   context.read<CounterStrike>().increase();
+                  showSnackBar(context, "${context.read<CounterStrike>().count}");
                 }),
             testButton(
                 titleName: "Initial D",
                 iconName: Icons.car_crash,
                 run: () {
-                  context.read<QuestionChinaProvider>().initialD();
+                  // context.read<QuestionChinaProvider>().initialD();
+                  showSnackBar(context, "Cancel");
                 }),
             testButton(
                 titleName: "Get China",
                 iconName: Icons.get_app,
                 run: () {
-                  // context.read<QuestionChinaProvider>().initialD;
                   print(context.read<QuestionChinaProvider>().getChina);
+                  showSnackBar(context, "Printed");
                 }),
             testButton(
                 titleName: "Get China",
                 iconName: Icons.get_app,
                 run: () {
-                  // context.read<QuestionChinaProvider>().initialD;
                   print(context.read<QuestionChinaProvider>().getRandom10.length);
+                  showSnackBar(context, "Printed");
                 }),
           ]),
         ),

@@ -5,10 +5,12 @@ class UserProfile extends StatelessWidget {
   const UserProfile({super.key, this.photoUrl});
 
   photoRender() {
-    if (photoUrl == null) {
+    if (photoUrl == null || photoUrl == "") {
       return Image.asset(
-        'assets/images/seki.png',
-      );
+        'assets/images/OTs_12.png',
+        fit: BoxFit.cover,
+      )
+      ;
     }
 
     return Image.network(photoUrl!);
