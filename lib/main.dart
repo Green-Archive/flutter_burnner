@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/layouts/default.dart';
-import 'package:flutter_burnner/pages/competition/hard_play.dart';
+import 'package:flutter_burnner/pages/competition/hard_mode.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
-import 'package:flutter_burnner/pages/competition/easy_play.dart';
+import 'package:flutter_burnner/pages/competition/easy_mode.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
-import 'package:flutter_burnner/pages/competition/medium_play.dart';
+import 'package:flutter_burnner/pages/competition/medium_mode.dart';
 import 'package:flutter_burnner/pages/competition/select_difficulty.dart';
+import 'package:flutter_burnner/pages/learning_content.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
 import 'package:flutter_burnner/pages/test_kim.dart';
-import 'package:flutter_burnner/pages/testkim.dart';
+import 'package:flutter_burnner/pages/practice_mode.dart';
 import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter_burnner/providers/heart.dart';
@@ -41,16 +42,17 @@ Future main() async {
         initialRoute: '/',
         routes: {
           '/home': (ctx) => HomeScreen(),
-          '/easy-play': (ctx) => EasyPlay(),
-          '/medium-play': (ctx) => MediumPlay(),
-          '/hard-play': (ctx) => HardPlay(),
+          '/easy-mode': (ctx) => EasyMode(),
+          '/medium-mode': (ctx) => MediumMode(),
+          '/hard-mode': (ctx) => HardMode(),
           '/select-difficulty': (ctx) => SelectDifficulty(),
           '/login': (ctx) => LoginScreen(),
           '/sign-up': (ctx) => SignUpScreen(),
           '/settings': (ctx) => SettingScreen(),
           '/test-kim': (ctx) => TestKim(),
           '/congrats': (ctx) => Congrats(),
-          '/test-blank-page': (ctx) => testBlankPage(),
+          '/practice-mode': (ctx) => PracticeMode(),
+          '/learning-mode': (ctx) => LearningMode(),
         },
       ),
     ),

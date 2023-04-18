@@ -25,7 +25,7 @@ class SelectDifficulty extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width / 1.5,
           alignment: AlignmentDirectional.center,
-          child: Text("Competition",
+          child: const Text("Competition",
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24,
@@ -52,7 +52,7 @@ class SelectDifficulty extends StatelessWidget {
                 padding: EdgeInsets.all(20.0),
                 height: 175,
                 alignment: AlignmentDirectional.center,
-                child: Text('Illustration',
+                child: const Text('Illustration',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -66,7 +66,7 @@ class SelectDifficulty extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text('select difficulty',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -79,24 +79,24 @@ class SelectDifficulty extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              NormalButton('Easy', 1.5, 100, '/easy-play'),
+            children: const [
+              NormalButton('★\nEasy', 1.5, 100, '/easy-mode'),
             ],
           ),
           const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              NormalButton('Medium', 1.5, 100, '/medium-play'),
+            children: const [
+              NormalButton('★★\nMedium', 1.5, 100, '/medium-mode'),
             ],
           ),
           const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              NormalButton('Hard', 1.5, 100, '/hard-play'),
+            children: const [
+              NormalButton('★★★\nHard', 1.5, 100, '/hard-mode'),
             ],
           ),
         ],

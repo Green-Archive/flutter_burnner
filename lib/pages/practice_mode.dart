@@ -10,14 +10,14 @@ import 'package:provider/provider.dart';
 import '../../models/china_characters.dart';
 import '../../providers/heart.dart';
 
-class EasyPlay extends StatefulWidget {
-  EasyPlay({super.key});
+class PracticeMode extends StatefulWidget {
+  PracticeMode({super.key});
 
   @override
-  _EasyPlayState createState() => _EasyPlayState();
+  _PracticeModeState createState() => _PracticeModeState();
 }
 
-class _EasyPlayState extends State<EasyPlay> {
+class _PracticeModeState extends State<PracticeMode> {
   late List<ChinaCharacters> chiQues;
 
   late ChinaCharacters wrongOne;
@@ -28,8 +28,7 @@ class _EasyPlayState extends State<EasyPlay> {
 
   @override
   void initState() {
-    chiQues = context.read<QuestionChinaProvider>().getRandom10;
-    context.read<Heart>().startHeart(3);
+    chiQues = context.read<QuestionChinaProvider>().allChineseWords;
     wrongOne = context.read<QuestionChinaProvider>().getRandom1;
 
     while (wrongOne.character == chiQues[numQues].character) {
@@ -63,9 +62,6 @@ class _EasyPlayState extends State<EasyPlay> {
 
   void wrongCLick() {
     showSnackBar(context, "Wrong");
-    context.read<Heart>().decrease();
-
-    if (context.read<Heart>().getHeart == 0) navigateToCongrats();
 
     if (numQues < chiQues.length - 1) {
       numQues++;
@@ -77,16 +73,7 @@ class _EasyPlayState extends State<EasyPlay> {
     }
   }
 
-  List<Widget> heartIcon() {
-    return [Icon(
-      Icons.favorite,
-      color: Colors.red[600],
-      size: 30,
 
-    ),const SizedBox(
-      width: 15,
-    ),];
-  }
 
   Widget showLimit() {
     return Center(
@@ -123,16 +110,12 @@ class _EasyPlayState extends State<EasyPlay> {
     return NormalLayout(
       head: [
         const Expanded(child: BackToTheFuture()),
-        // showLimit(),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ...heartIcon(),
-              const HeartRemain(),
-            ],
-          ),
-        ),
+        showLimit(),
+          Expanded(
+           child: Row(),
+         ),
+
+
       ],
       betweenHeadAndBody: 0,
       body: [
@@ -164,53 +147,6 @@ class _EasyPlayState extends State<EasyPlay> {
         const SizedBox(height: 15),
         questions[1],
       ],
-    );
-  }
-}
-
-class HeartRemain extends StatelessWidget {
-  const HeartRemain({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('${context.watch<Heart>().getHeart}',
-        style: const TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w800,
-        ));
-  }
-}
-
-class DividerExample extends StatelessWidget {
-  const DividerExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Divider divider = Divider(
-      height: 20,
-      thickness: 4,
-      indent: 0,
-      endIndent: 0,
-      color: Colors.lightBlueAccent[100],
-    );
-
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 60.0,
-        right: 60.0,
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 41.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-        ],
-      ),
     );
   }
 }

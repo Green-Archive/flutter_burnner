@@ -11,14 +11,14 @@ import '../../models/china_characters.dart';
 import '../../providers/heart.dart';
 import '../../providers/timer.dart';
 
-class MediumPlay extends StatefulWidget {
-  MediumPlay({super.key});
+class MediumMode extends StatefulWidget {
+  MediumMode({super.key});
 
   @override
-  _MediumPlayState createState() => _MediumPlayState();
+  _MediumModeState createState() => _MediumModeState();
 }
 
-class _MediumPlayState extends State<MediumPlay> {
+class _MediumModeState extends State<MediumMode> {
   late List<ChinaCharacters> chiQues;
 
   late List<ChinaCharacters> choiceQues;

@@ -54,8 +54,10 @@ class TextDisplay extends StatelessWidget {
     return Text('${textDisplay}',
         textAlign: TextAlign.center,
         style: GoogleFonts.inter(
+            height: 1.5,
             fontSize: 16,
             fontWeight: FontWeight.w500,
             color: Colors.black.withOpacity(0.8)));
+
   }
 }

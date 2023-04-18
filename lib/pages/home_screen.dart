@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Padding(
                 padding: EdgeInsets.only(left: 30.0, right: 30.0),
                 child: Column(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Hello,",
+                        const Text("Hello,",
                             style: TextStyle(
                               fontFamily: 'Inter-Light',
                               fontSize: 50,
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Text(
                             '${userName}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'Inter-Light',
                               fontSize: 24,
                               fontWeight: FontWeight.w400,
@@ -97,39 +97,62 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 60),
             Expanded(
                 child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NormalButton(
-                          'Competition', 1.5, 130, '/select-difficulty',
-                          run: () {})
-                    ],
-                  ),
-                  const SizedBox(height: 40),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      NormalButton('Practice \n Mode', 3, 130, '/congrats'),
-                      NormalButton('Test \n Content', 3, 130, '/test-kim')
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      NormalButton('Topic', 3.5, 80, '/test-blank-page'),
-                      NormalButton('Score', 3.5, 80, '/easy-play'),
-                      NormalButton('Settings', 3.5, 80, '/settings')
-                    ],
-                  )
-                ],
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NormalButton(
+                            'Competition', 1.5, 130, '/select-difficulty',
+                            run: () {})
+                      ],
+                    ),
+                    const SizedBox(height: 40),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        NormalButton('Practice \n Mode', 3, 130, '/practice-mode'),
+                        NormalButton('Learning \n Content', 3, 130, '/learning-mode')
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () => Navigator.pushNamed(context, '/test-blank-page') , icon: const Icon(
+
+                          Icons.home_outlined,
+                          size: 50,
+                          color: Colors.white,
+                        )),
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () => Navigator.pushNamed(context, '/settings') , icon: const Icon(
+                          Icons.bar_chart_outlined,
+                          size: 50,
+                          color: Colors.white,
+                        )),
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () => Navigator.pushNamed(context, '/settings') , icon: const Icon(
+                          Icons.settings,
+                          size: 50,
+                          color: Colors.white,
+                        ))
+                      ],
+                    )
+                  ],
+                ),
               ),
             ))
           ],

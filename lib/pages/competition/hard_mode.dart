@@ -11,14 +11,14 @@ import '../../models/china_characters.dart';
 import '../../providers/heart.dart';
 import '../../providers/timer.dart';
 
-class HardPlay extends StatefulWidget {
-  HardPlay({super.key});
+class HardMode extends StatefulWidget {
+  HardMode({super.key});
 
   @override
-  _HardPlayState createState() => _HardPlayState();
+  _HardModeState createState() => _HardModeState();
 }
 
-class _HardPlayState extends State<HardPlay> {
+class _HardModeState extends State<HardMode> {
   late List<ChinaCharacters> chiQues;
 
   late List<ChinaCharacters> choiceQues;
