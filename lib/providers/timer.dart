@@ -7,37 +7,46 @@ import 'package:flutter_burnner/pages/home_screen.dart';
 class TimerCount with ChangeNotifier {
 
   late Timer _timer;
-  int _start = 5;
+  late int _start;
+  late int _restart;
 
   int get getTime => _start;
 
+  void setTime(restart)
+  {
+    _start = restart;
+  }
+
+  void setResetTime()
+  {
+    _restart = _start;
+  }
 
   void resetTime()
   {
-    _start = 5;
+    _start = _restart;
   }
 
-  void startTimer({required BuildContext context, required String mode, required int numQues}) {
+  void cancelTime()
+  {
+    _timer.cancel();
+  }
+
+  void startTimer({required BuildContext context, required String mode, required int score, required int setTimeSecond}) {
+    setTime(setTimeSecond);
+    setResetTime();
     const oneSec =  Duration(seconds: 1);
+
     _timer =   Timer.periodic(
       oneSec,
           (Timer timer) {
         if (_start == 0) {
             timer.cancel();
-
             Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-              "mode": "Medium",
-              "score": numQues,
+              "mode": mode,
+              "score": score,
             });
 
-
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
-            //   ModalRoute.withName('/'),
-            // );
-
-            // resetTime();
             notifyListeners();
 
         } else {

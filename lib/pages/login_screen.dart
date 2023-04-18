@@ -138,10 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signInWithGoogle(BuildContext context) async {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => Center(child: CircularProgressIndicator()));
+        // showDialog(
+        //     context: context,
+        //     barrierDismissible: false,
+        //     builder: (context) => Center(child: CircularProgressIndicator()));
 
     try {
       if (kIsWeb) {
@@ -189,10 +189,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => Center(child: CircularProgressIndicator()));
+    // showDialog(
+    //     context: context,
+    //     barrierDismissible: false,
+    //     builder: (context) => Center(child: CircularProgressIndicator()));
 
     await _auth
         .signInWithEmailAndPassword(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/normalLayout.dart';
+import '../layouts/default.dart';
 import '../components/theme_app.dart';
 
 class Congrats extends StatelessWidget {

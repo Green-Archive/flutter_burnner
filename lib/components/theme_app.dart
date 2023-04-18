@@ -96,14 +96,25 @@ class ThemeApp {
 }
 
 class BackToTheFuture extends StatelessWidget {
-  const BackToTheFuture({Key? key}) : super(key: key);
+
+   final Function()? run;
+
+  const BackToTheFuture({Key? key, this.run}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       alignment: AlignmentDirectional.topStart,
       child: InkWell(
           onTap: () {
+
+            if (run != null) {
+              run!();
+            } else {
+              print("No  run");
+            }
+
             Navigator.pop(context);
           },
           child: const Icon(

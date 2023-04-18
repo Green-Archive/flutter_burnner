@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/components/normalLayout.dart';
+import 'package:flutter_burnner/layouts/default.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
-import 'package:flutter_burnner/pages/easy_play.dart';
+import 'package:flutter_burnner/pages/competition/easy_play.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
-import 'package:flutter_burnner/pages/medium_play.dart';
-import 'package:flutter_burnner/pages/select_difficulty.dart';
+import 'package:flutter_burnner/pages/competition/medium_play.dart';
+import 'package:flutter_burnner/pages/competition/select_difficulty.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
 import 'package:flutter_burnner/pages/sign_up_screen.dart';
 import 'package:flutter_burnner/pages/test_kim.dart';

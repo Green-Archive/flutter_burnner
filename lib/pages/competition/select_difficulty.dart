@@ -1,9 +1,9 @@
-import 'package:flutter_burnner/components/normalLayout.dart';
+import 'package:flutter_burnner/layouts/default.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../components/normal_button.dart';
-import '../components/theme_app.dart';
+import '../../components/normal_button.dart';
+import '../../components/theme_app.dart';
 
 class SelectDifficulty extends StatelessWidget {
   const SelectDifficulty({super.key});

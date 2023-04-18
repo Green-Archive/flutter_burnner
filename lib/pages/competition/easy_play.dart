@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/components/normalLayout.dart';
+import 'package:flutter_burnner/layouts/default.dart';
 import 'package:flutter_burnner/components/showSnackbar.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
@@ -7,8 +7,8 @@ import 'package:flutter_burnner/providers/china_quest.dart';
 import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../models/china_characters.dart';
-import '../providers/heart.dart';
+import '../../models/china_characters.dart';
+import '../../providers/heart.dart';
 
 class EasyPlay extends StatefulWidget {
   EasyPlay({super.key});
@@ -44,14 +44,14 @@ class _EasyPlayState extends State<EasyPlay> {
       "mode": "EZ",
       "score": score,
     });
-    // Navigator.pushNamedAndRemoveUntil(context, '/congrats', (Route<dynamic> route) => false);
   }
 
   void correctClick() {
+    score++;
     showSnackBar(context, "Good");
+
     if (numQues < chiQues.length - 1) {
       numQues++;
-      score++;
 
       do {
         wrongOne = context.read<QuestionChinaProvider>().getRandom1;
@@ -77,12 +77,24 @@ class _EasyPlayState extends State<EasyPlay> {
     }
   }
 
-  Widget heartIcon() {
-    return Icon(
+  List<Widget> heartIcon() {
+    return [Icon(
       Icons.favorite,
       color: Colors.red[600],
       size: 30,
-    );
+
+    ),const SizedBox(
+      width: 15,
+    ),];
+  }
+
+  Widget showLimit() {
+    return Center(
+        child: Text("${numQues + 1}/${chiQues.length}",
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w800,
+            )));
   }
 
   @override
@@ -110,16 +122,14 @@ class _EasyPlayState extends State<EasyPlay> {
 
     return NormalLayout(
       head: [
-        Expanded(child: BackToTheFuture()),
+        const Expanded(child: BackToTheFuture()),
+        // showLimit(),
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              heartIcon(),
-              const SizedBox(
-                width: 15,
-              ),
-              HeartRemain(),
+              ...heartIcon(),
+              const HeartRemain(),
             ],
           ),
         ),

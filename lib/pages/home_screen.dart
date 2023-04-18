@@ -34,9 +34,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<QuestionChinaProvider>().initialD();
-    // });
 
     String userName = disPlayName();
 
@@ -82,10 +79,6 @@ class HomeScreen extends StatelessWidget {
                             ),
                           )
                         ]),
-
-                        // Column(
-                        //     mainAxisSize: MainAxisSize.max,
-                        //     children: [UserProfile(photoUrl: user.photoURL)]),
                       ],
                     ),
                   ],
