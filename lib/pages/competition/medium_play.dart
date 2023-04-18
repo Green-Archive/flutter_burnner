@@ -21,7 +21,10 @@ class MediumPlay extends StatefulWidget {
 class _MediumPlayState extends State<MediumPlay> {
   late List<ChinaCharacters> chiQues;
 
-  late ChinaCharacters wrongOne;
+  late List<ChinaCharacters> choiceQues;
+
+  late ChinaCharacters wrongOne_1;
+  late ChinaCharacters wrongOne_2;
 
   int numQues = 0;
 
@@ -33,14 +36,34 @@ class _MediumPlayState extends State<MediumPlay> {
 
     chiQues = context.read<QuestionChinaProvider>().getRandom10;
     context.read<Heart>().startHeart(3);
-    wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+    setQuestions();
 
-    while (wrongOne.character == chiQues[numQues].character) {
-      wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-    }
+    // while (wrongOne_1.character == chiQues[numQues].character) {
+    //   wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
+    // }
 
     context.read<TimerCount>().startTimer(context :context, score:score, mode: "Medium", setTimeSecond: 20);
     super.initState();
+  }
+
+  void setQuestions()
+  {
+    do {
+      wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
+      wrongOne_2 = context.read<QuestionChinaProvider>().getRandom1;
+
+      choiceQues = [];
+      choiceQues.add( chiQues[numQues]);
+      choiceQues.add(wrongOne_1);
+      choiceQues.add(wrongOne_2);
+    } while (choiceQues.any((choiceQuestion) => choiceQues.indexOf(choiceQuestion) != choiceQues.lastIndexOf(choiceQuestion)));
+  }
+
+
+  void thisIsTheEnd()
+  {
+    context.read<TimerCount>().cancelTime();
+    navigateToCongrats();
   }
 
   void navigateToCongrats() {
@@ -58,11 +81,11 @@ class _MediumPlayState extends State<MediumPlay> {
     if (numQues < chiQues.length - 1) {
       numQues++;
 
-      do {
-        wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-      } while (wrongOne.character == chiQues[numQues].character);
+      setQuestions();
+
+
     } else {
-      navigateToCongrats();
+      thisIsTheEnd();
     }
   }
 
@@ -71,15 +94,14 @@ class _MediumPlayState extends State<MediumPlay> {
     showSnackBar(context, "Wrong");
     context.read<Heart>().decrease();
 
-    if (context.read<Heart>().getHeart == 0) navigateToCongrats();
+    if (context.read<Heart>().getHeart == 0) thisIsTheEnd();
+
 
     if (numQues < chiQues.length - 1) {
       numQues++;
-      do {
-        wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-      } while (wrongOne.character == chiQues[numQues].character);
+      setQuestions();
     } else {
-      navigateToCongrats();
+      thisIsTheEnd();
     }
   }
 
@@ -116,12 +138,20 @@ class _MediumPlayState extends State<MediumPlay> {
         context: context,
         widthButton: 1.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne.eng_meaning}',
+        textDisplay: '❌ ${wrongOne_1.eng_meaning}',
+        run: () => setState(() => wrongCLick()));
+
+    Widget wrongChoice_2 = ThemeApp.NomalButtonShape(
+        context: context,
+        widthButton: 1.2,
+        heightButton: 110,
+        textDisplay: '❌ ${wrongOne_2.eng_meaning}',
         run: () => setState(() => wrongCLick()));
 
     List<Widget> questions = [
       correctChoice,
       wrongChoice_1,
+      wrongChoice_2,
     ];
 
     questions.shuffle();
@@ -145,13 +175,20 @@ class _MediumPlayState extends State<MediumPlay> {
       betweenHeadAndBody: 0,
       body: [
         Container(
+          height: 200,
+          padding: EdgeInsets.only(left: 15.0, right: 15.0),
           alignment: Alignment.center,
-          child: Text(
-            '${chiQues[numQues].character}',
-            style: TextStyle(
+          child:
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              '${chiQues[numQues].character}',
+              style: TextStyle(
                 fontSize: 150,
-                fontWeight: FontWeight.bold,
-                color: Colors.indigo[800]),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.indigo[800]
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 30),
@@ -164,6 +201,8 @@ class _MediumPlayState extends State<MediumPlay> {
         questions[0],
         const SizedBox(height: 15),
         questions[1],
+        const SizedBox(height: 15),
+        questions[2],
       ],
     );
   }

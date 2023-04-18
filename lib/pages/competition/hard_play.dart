@@ -9,18 +9,23 @@ import 'package:provider/provider.dart';
 
 import '../../models/china_characters.dart';
 import '../../providers/heart.dart';
+import '../../providers/timer.dart';
 
-class EasyPlay extends StatefulWidget {
-  EasyPlay({super.key});
+class HardPlay extends StatefulWidget {
+  HardPlay({super.key});
 
   @override
-  _EasyPlayState createState() => _EasyPlayState();
+  _HardPlayState createState() => _HardPlayState();
 }
 
-class _EasyPlayState extends State<EasyPlay> {
+class _HardPlayState extends State<HardPlay> {
   late List<ChinaCharacters> chiQues;
 
-  late ChinaCharacters wrongOne;
+  late List<ChinaCharacters> choiceQues;
+
+  late ChinaCharacters wrongOne_1;
+  late ChinaCharacters wrongOne_2;
+  late ChinaCharacters wrongOne_3;
 
   int numQues = 0;
 
@@ -30,62 +35,85 @@ class _EasyPlayState extends State<EasyPlay> {
   void initState() {
     chiQues = context.read<QuestionChinaProvider>().getRandom10;
     context.read<Heart>().startHeart(3);
-    wrongOne = context.read<QuestionChinaProvider>().getRandom1;
+    setQuestions();
 
-    while (wrongOne.character == chiQues[numQues].character) {
-      wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-    }
+    // while (wrongOne_1.character == chiQues[numQues].character) {
+    //   wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
+    // }
 
+    context.read<TimerCount>().startTimer(
+        context: context, score: score, mode: "Hard", setTimeSecond: 10);
     super.initState();
+  }
+
+  void setQuestions() {
+    do {
+      wrongOne_1 = context.read<QuestionChinaProvider>().getRandom1;
+      wrongOne_2 = context.read<QuestionChinaProvider>().getRandom1;
+      wrongOne_3 = context.read<QuestionChinaProvider>().getRandom1;
+
+      choiceQues = [];
+      choiceQues.add(chiQues[numQues]);
+      choiceQues.add(wrongOne_1);
+      choiceQues.add(wrongOne_2);
+      choiceQues.add(wrongOne_3);
+    } while (choiceQues.any((choiceQuestion) =>
+        choiceQues.indexOf(choiceQuestion) !=
+        choiceQues.lastIndexOf(choiceQuestion)));
+  }
+
+  void thisIsTheEnd() {
+    context.read<TimerCount>().cancelTime();
+    navigateToCongrats();
   }
 
   void navigateToCongrats() {
     Navigator.pushReplacementNamed(context, "/congrats", arguments: {
-      "mode": "EZ",
+      "mode": "Hard",
       "score": score,
     });
   }
 
   void correctClick() {
+    context.read<TimerCount>().resetTime();
     score++;
     showSnackBar(context, "Good");
 
     if (numQues < chiQues.length - 1) {
       numQues++;
 
-      do {
-        wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-      } while (wrongOne.character == chiQues[numQues].character);
+      setQuestions();
     } else {
-      navigateToCongrats();
+      thisIsTheEnd();
     }
   }
 
   void wrongCLick() {
+    context.read<TimerCount>().resetTime();
     showSnackBar(context, "Wrong");
     context.read<Heart>().decrease();
 
-    if (context.read<Heart>().getHeart == 0) navigateToCongrats();
+    if (context.read<Heart>().getHeart == 0) thisIsTheEnd();
 
     if (numQues < chiQues.length - 1) {
       numQues++;
-      do {
-        wrongOne = context.read<QuestionChinaProvider>().getRandom1;
-      } while (wrongOne.character == chiQues[numQues].character);
+      setQuestions();
     } else {
-      navigateToCongrats();
+      thisIsTheEnd();
     }
   }
 
   List<Widget> heartIcon() {
-    return [Icon(
-      Icons.favorite,
-      color: Colors.red[600],
-      size: 30,
-
-    ),const SizedBox(
-      width: 15,
-    ),];
+    return [
+      Icon(
+        Icons.favorite,
+        color: Colors.red[600],
+        size: 30,
+      ),
+      const SizedBox(
+        width: 15,
+      ),
+    ];
   }
 
   Widget showLimit() {
@@ -101,29 +129,49 @@ class _EasyPlayState extends State<EasyPlay> {
   Widget build(BuildContext context) {
     Widget correctChoice = ThemeApp.NomalButtonShape(
         context: context,
-        widthButton: 1.2,
+        widthButton: 2.2,
         heightButton: 110,
         textDisplay: '✔️${chiQues[numQues].eng_meaning}',
         run: () => setState(() => correctClick()));
 
     Widget wrongChoice_1 = ThemeApp.NomalButtonShape(
         context: context,
-        widthButton: 1.2,
+        widthButton: 2.2,
         heightButton: 110,
-        textDisplay: '❌ ${wrongOne.eng_meaning}',
+        textDisplay: '❌ ${wrongOne_1.eng_meaning}',
+        run: () => setState(() => wrongCLick()));
+
+    Widget wrongChoice_2 = ThemeApp.NomalButtonShape(
+        context: context,
+        widthButton: 2.2,
+        heightButton: 110,
+        textDisplay: '❌ ${wrongOne_2.eng_meaning}',
+        run: () => setState(() => wrongCLick()));
+
+    Widget wrongChoice_3 = ThemeApp.NomalButtonShape(
+        context: context,
+        widthButton: 2.2,
+        heightButton: 110,
+        textDisplay: '❌ ${wrongOne_3.eng_meaning}',
         run: () => setState(() => wrongCLick()));
 
     List<Widget> questions = [
       correctChoice,
       wrongChoice_1,
+      wrongChoice_2,
+      wrongChoice_3,
     ];
 
     questions.shuffle();
 
     return NormalLayout(
       head: [
-        const Expanded(child: BackToTheFuture()),
-        // showLimit(),
+        Expanded(child: BackToTheFuture(
+          run: () {
+            context.read<TimerCount>().cancelTime();
+          },
+        )),
+        TimeMy(),
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -140,16 +188,14 @@ class _EasyPlayState extends State<EasyPlay> {
           height: 200,
           padding: EdgeInsets.only(left: 15.0, right: 15.0),
           alignment: Alignment.center,
-          child:
-          FittedBox(
+          child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
               '${chiQues[numQues].character}',
               style: TextStyle(
                   fontSize: 150,
                   fontWeight: FontWeight.bold,
-                  color: Colors.indigo[800]
-              ),
+                  color: Colors.indigo[800]),
             ),
           ),
         ),
@@ -160,9 +206,23 @@ class _EasyPlayState extends State<EasyPlay> {
               fontWeight: FontWeight.w400,
             )),
         const SizedBox(height: 30),
-        questions[0],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            questions[0],
+            const SizedBox(width: 15),
+            questions[1],
+          ],
+        ),
         const SizedBox(height: 15),
-        questions[1],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            questions[2],
+            const SizedBox(width: 15),
+            questions[3],
+          ],
+        ),
       ],
     );
   }
@@ -181,36 +241,15 @@ class HeartRemain extends StatelessWidget {
   }
 }
 
-class DividerExample extends StatelessWidget {
-  const DividerExample({super.key});
+class TimeMy extends StatelessWidget {
+  const TimeMy({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Divider divider = Divider(
-      height: 20,
-      thickness: 4,
-      indent: 0,
-      endIndent: 0,
-      color: Colors.lightBlueAccent[100],
-    );
-
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 60.0,
-        right: 60.0,
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: 41.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-          const SizedBox(height: 25.0),
-          divider,
-        ],
-      ),
-    );
+    return Text('${context.watch<TimerCount>().getTime}',
+        style: const TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w800,
+        ));
   }
 }

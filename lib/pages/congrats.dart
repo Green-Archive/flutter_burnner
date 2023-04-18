@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../layouts/default.dart';
 import '../components/theme_app.dart';
+import '../providers/timer.dart';
 
 class Congrats extends StatelessWidget {
   const Congrats({Key? key}) : super(key: key);

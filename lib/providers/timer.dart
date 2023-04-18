@@ -41,7 +41,7 @@ class TimerCount with ChangeNotifier {
       oneSec,
           (Timer timer) {
         if (_start == 0) {
-            timer.cancel();
+          cancelTime();
             Navigator.pushReplacementNamed(context, "/congrats", arguments: {
               "mode": mode,
               "score": score,

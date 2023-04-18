@@ -54,7 +54,7 @@ class QuestionChinaProvider with ChangeNotifier {
             toFirestore: (ChinaCharacters chinaCharacters, _) =>
                 chinaCharacters.toFirestore(),
           )
-          .limit(5)
+          .limit(20)
           .get()
           .then((QuerySnapshot<ChinaCharacters> querySnapshot) {
         if (querySnapshot.docs.isNotEmpty) {

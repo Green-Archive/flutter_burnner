@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_burnner/layouts/default.dart';
+import 'package:flutter_burnner/pages/competition/hard_play.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
 import 'package:flutter_burnner/pages/competition/easy_play.dart';
 import 'package:flutter_burnner/pages/home_screen.dart';
@@ -39,9 +40,10 @@ Future main() async {
         home: MainPage(),
         initialRoute: '/',
         routes: {
+          '/home': (ctx) => HomeScreen(),
           '/easy-play': (ctx) => EasyPlay(),
           '/medium-play': (ctx) => MediumPlay(),
-          '/home': (ctx) => HomeScreen(),
+          '/hard-play': (ctx) => HardPlay(),
           '/select-difficulty': (ctx) => SelectDifficulty(),
           '/login': (ctx) => LoginScreen(),
           '/sign-up': (ctx) => SignUpScreen(),
