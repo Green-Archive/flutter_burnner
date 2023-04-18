@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/layouts/default.dart';
 import 'package:flutter_burnner/pages/competition/hard_mode.dart';
 import 'package:flutter_burnner/pages/congrats.dart';
 import 'package:flutter_burnner/pages/competition/easy_mode.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_burnner/pages/competition/select_difficulty.dart';
 import 'package:flutter_burnner/pages/learning_content.dart';
 import 'package:flutter_burnner/pages/score_board.dart';
 import 'package:flutter_burnner/pages/setting_screen.dart';
-import 'package:flutter_burnner/pages/sign_up_screen.dart';
+import 'package:flutter_burnner/pages/authentication/sign_up_screen.dart';
 import 'package:flutter_burnner/pages/test_kim.dart';
 import 'package:flutter_burnner/pages/practice_mode.dart';
 import 'package:flutter_burnner/providers/china_quest.dart';
@@ -17,7 +16,7 @@ import 'package:flutter_burnner/providers/counter_provider.dart';
 import 'package:flutter_burnner/providers/heart.dart';
 import 'package:flutter_burnner/providers/timer.dart';
 import 'package:flutter_burnner/providers/users_score_load.dart';
-import 'pages/login_screen.dart';
+import 'pages/authentication/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -40,7 +39,7 @@ Future main() async {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Login Screen ",
+        title: "LinguaOtter",
         home: MainPage(),
         initialRoute: '/',
         routes: {
@@ -65,6 +64,8 @@ Future main() async {
 }
 
 class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
   @override
   Widget build(BuildContext context) {
 

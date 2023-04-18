@@ -4,7 +4,7 @@ import 'package:flutter_burnner/components/showSnackbar.dart';
 import 'package:flutter_burnner/components/theme_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../components/login_text_box.dart';
+import '../../components/login_text_box.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {

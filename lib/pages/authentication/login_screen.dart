@@ -2,13 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_burnner/pages/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../components/login_text_box.dart';
-import '../components/showSnackbar.dart';
-import '../components/theme_app.dart';
-import '../components/oauth_button.dart';
+import '../../components/login_text_box.dart';
+import '../../components/showSnackbar.dart';
+import '../../components/theme_app.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -307,7 +305,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: SizedBox.fromSize(
             size: const Size.fromRadius(60), // Image radius
             child: Image.asset(
-              'assets/images/seki.png',
+              'assets/images/logo_china.png',
             ),
           ),
         ));
