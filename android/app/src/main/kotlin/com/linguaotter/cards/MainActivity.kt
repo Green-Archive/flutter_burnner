@@ -1,4 +1,4 @@
-package com.example.flutter_burnner
+package com.linguaotter.cards
 
 import io.flutter.embedding.android.FlutterActivity
 
